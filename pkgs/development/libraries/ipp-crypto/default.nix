@@ -38,7 +38,7 @@ gcc11Stdenv.mkDerivation rec {
   # cmakeFlags = [ "-GNinja" ] ++ lib.optionals (stdenv.isLinux) [ "-DCMAKE_OSX_ARCHITECTURES=" ];
 
   installPhase = ''
-    mkdir --parents $out
+    mkdir --parents $out $dev
 
     mv ${buildDir}/.build/RELEASE/include $dev/include
     mv ${buildDir}/.build/RELEASE/* $out
