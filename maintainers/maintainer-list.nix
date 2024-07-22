@@ -16599,6 +16599,11 @@
     matrix = "@quantenzitrone:matrix.org";
     name = "quantenzitrone";
   };
+  quapka = {
+    email = "quapka@gmail.com";
+    github = "quapka";
+    githubId = 4338671;
+  };
   qubasa = {
     email = "consulting@qube.email";
     github = "Qubasa";

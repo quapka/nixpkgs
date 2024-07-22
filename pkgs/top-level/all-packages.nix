@@ -23459,6 +23459,8 @@ with pkgs;
 
   boringssl = callPackage ../development/libraries/boringssl { };
 
+  ipp-crypto = callPackage ../development/libraries/ipp-crypto { };
+
   wolfssl = darwin.apple_sdk_11_0.callPackage ../development/libraries/wolfssl {
     inherit (darwin.apple_sdk_11_0.frameworks) Security;
   };
