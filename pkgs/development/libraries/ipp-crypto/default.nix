@@ -40,10 +40,11 @@ gcc11Stdenv.mkDerivation rec {
   installPhase = ''
     mkdir --parents $out
 
-    mv ${buildDir}/.build/RELEASE/lib $out/lib
+    mv ${buildDir}/.build/RELEASE $out
+    mv ${buildDir}/.build/RELEASE/include $dev/
   '';
 
-  outputs = [ "out" ];
+  outputs = [ "out" "dev" ];
 
   meta = with lib; {
     description = "Intel® Integrated Performance Primitives Cryptography";
