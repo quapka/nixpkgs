@@ -40,8 +40,8 @@ gcc11Stdenv.mkDerivation rec {
   installPhase = ''
     mkdir --parents $out
 
-    mv ${buildDir}/.build/RELEASE $out
     mv ${buildDir}/.build/RELEASE/include $dev/
+    mv ${buildDir}/.build/RELEASE $out
   '';
 
   outputs = [ "out" "dev" ];
