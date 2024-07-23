@@ -36,6 +36,7 @@ stdenv.mkDerivation rec {
   installPhase = ''
     mkdir --parents $out/lib
     mv lib/wolfcrypt-jni.jar $out/lib
+    mv lib/wolfcryptjni.so $out/lib
   '';
 
   # FIXME we want JUNIT_HOME set for testing, but we don't have JUnit package now
