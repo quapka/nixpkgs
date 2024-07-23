@@ -7,22 +7,19 @@
 , ninja
 , openssl
 }:
-gcc11Stdenv.mkDerivation rec {
+gcc11Stdenv.mkDerivation (finalAttrs: rec {
   pname = "ipp-crypto";
   version = "2021.12.1";
 
   src = fetchgit {
     url = "https://github.com/intel/ipp-crypto";
-    rev = "ippcp_2021.12.1";
+    rev = "ippcp_${finalAttrs.version}";
     hash = "sha256-voxjx9Np/8jy9XS6EvUK4aW18/DGQGaPpTKm9RzuCU8=";
   };
 
   nativeBuildInputs = [ cmake nasm python39 openssl ninja ];
 
-
-
   buildDir = "_build";
-
 
   configurePhase = ''
     CC=gcc CXX=g++ cmake CMakeLists.txt -GNinja -B${buildDir} -DARCH=intel64 -DCMAKE_BUILD_TYPE=Release
@@ -52,4 +49,4 @@ gcc11Stdenv.mkDerivation rec {
     maintainers = [ maintainers.quapka ];
     license = with licenses; [ asl20 ];
   };
-}
+})
