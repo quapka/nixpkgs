@@ -23463,6 +23463,8 @@ with pkgs;
     inherit (darwin.apple_sdk_11_0.frameworks) Security;
   };
 
+  wolfcrypt-jni = callPackage ../development/libraries/wolfcrypt-jni { };
+
   openssl = openssl_3;
 
   openssl_legacy = openssl.override {
