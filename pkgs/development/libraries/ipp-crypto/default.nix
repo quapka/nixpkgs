@@ -31,9 +31,11 @@ gcc11Stdenv.mkDerivation (finalAttrs: rec {
     popd
   '';
 
-  # # CMAKE_OSX_ARCHITECTURES is set to x86_64 by Nix, but it confuses boringssl on aarch64-linux.
-  # cmakeFlags = [ "-GNinja" ] ++ lib.optionals (stdenv.isLinux) [ "-DCMAKE_OSX_ARCHITECTURES=" ];
+  checkPhase = ''
+    cmakePcfileCheckPhase
+  '';
 
+  # NOTE: put .build/RELEASE/pkgconfig to $out/lib/?
   installPhase = ''
     mkdir --parents $out $dev
 
