@@ -258,6 +258,8 @@ with pkgs;
 
   aocd = with python3Packages; toPythonApplication aocd;
 
+  aocl-crypto = callPackage ../development/libraries/aocl-crypto { };
+
   aesfix = callPackage ../tools/security/aesfix { };
 
   aeskeyfind = callPackage ../tools/security/aeskeyfind { };
