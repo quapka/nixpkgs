@@ -10309,6 +10309,8 @@ self: super: with self; {
 
   pyogrio = callPackage ../development/python-modules/pyogrio { };
 
+  pyone = callPackage ../development/python-modules/pyone { };
+
   pyorthanc = callPackage ../development/python-modules/pyorthanc { };
 
   pyoutbreaksnearme = callPackage ../development/python-modules/pyoutbreaksnearme { };
