@@ -33,7 +33,7 @@ buildPythonPackage rec {
 
   sourceRoot = "source/src/oca/python";
 
-  nativeBuildInputs = [
+  propagatedBuildInputs= [
     lxml
     dict2xml
     xmltodict
