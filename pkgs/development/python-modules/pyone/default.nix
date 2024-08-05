@@ -11,12 +11,14 @@
   aenum,
   tblib,
   requests,
+  generateds,
+  # venvShellHook,
   # dev deps
   check-manifest,
   # test deps
   coverage,
   pytest,
-  tox
+  python
 }:
 
 buildPythonPackage rec {
@@ -33,6 +35,15 @@ buildPythonPackage rec {
 
   sourceRoot = "source/src/oca/python";
 
+  # patchPhase = ''
+  #   substituteInPlace pyone/__init__.py \
+  #     --replace-fail 'from pyone import bindings' 'import pyone.bindings'
+  # '';
+
+  nativeBuildInputs = [
+    generateds
+  ];
+
   propagatedBuildInputs= [
     lxml
     dict2xml
@@ -43,13 +54,33 @@ buildPythonPackage rec {
     requests
   ];
 
+  # NOTE: the tests directory/module does not exist
+  #       see https://github.com/OpenNebula/one/issues/6685
   doCheck = false;
 
-  nativeCheckInputs = [
-    coverage
-    pytest
-    tox
-  ];
+  bindingsDir = "${python.sitePackages}/${pname}/bindings";
+
+  postInstall = ''
+    mkdir --parents $out/${bindingsDir}
+    ${generateds.bin}/generateDS.py -q -f -o $out/${bindingsDir}/supbind.py \
+      -s $out/${bindingsDir}/__init__.py --super=supbind --external-encoding=utf-8 \
+      --silence ../../../share/doc/xsd/index.xsd
+    sed -i "s/import supbind/from . import supbind/" $out/${bindingsDir}/__init__.py
+    sed -i "s/import sys/import sys\nfrom pyone.util import TemplatedType/" $out/${bindingsDir}/__init__.py
+    sed -i "s/(supermod\./(TemplatedType, supermod\./g" $out/${bindingsDir}/__init__.py
+    # sed -i "s/import supbind as supermod/from . import supbind as supermod/g" $out/${bindingsDir}/__init__.py
+  '';
+
+
+  # # # NOTE this is a very limited check see the note above
+  # checkPhase = ''
+  #   python -c 'import pyone'
+  # '';
+
+  # nativeCheckInputs = [
+  #   coverage
+  #   pytest
+  # ];
 
   meta = with lib; {
     description = "";
