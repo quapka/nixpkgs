@@ -1,0 +1,1564 @@
+diff --git a/Demos/Xmlbehavior/po.py b/Demos/Xmlbehavior/po.py
+index 5e5e694..1343ac5 100644
+--- a/Demos/Xmlbehavior/po.py
++++ b/Demos/Xmlbehavior/po.py
+@@ -373,7 +373,7 @@ class SaxPurchase_orderHandler(handler.ContentHandler):
+         self.locator = locator
+     
+     def showError(self, msg):
+-        print '*** (showError):', msg
++        print('*** (showError):', msg)
+         sys.exit(-1)
+ 
+     def startElement(self, name, attrs):
+@@ -555,7 +555,7 @@ Options:
+ """
+ 
+ def usage():
+-    print USAGE_TEXT
++    print(USAGE_TEXT)
+     sys.exit(-1)
+ 
+ 
+diff --git a/SWIG/generateDS.py b/SWIG/generateDS.py
+index 69c55f9..e76dae8 100755
+--- a/SWIG/generateDS.py
++++ b/SWIG/generateDS.py
+@@ -160,7 +160,7 @@ class XschemaHandler(handler.ContentHandler):
+         return self.root
+ 
+     def showError(self, msg):
+-        print msg
++        print(msg)
+         sys.exit(-1)
+ 
+     def startElement(self, name, attrs):
+@@ -216,7 +216,7 @@ class XschemaHandler(handler.ContentHandler):
+         elif name == 'xs:schema':
+             self.inSchema = 0
+             if len(self.stack) != 1:
+-                print '*** error stack'
++                print('*** error stack')
+                 sys.exit(-1)
+             self.root = self.stack[0]
+ 
+@@ -949,7 +949,7 @@ Options:
+ """
+ 
+ def usage():
+-    print USAGE_TEXT
++    print(USAGE_TEXT)
+     sys.exit(-1)
+ 
+ 
+diff --git a/SWIG/testsuper.py b/SWIG/testsuper.py
+index a510b8a..5e225ae 100644
+--- a/SWIG/testsuper.py
++++ b/SWIG/testsuper.py
+@@ -1122,7 +1122,7 @@ Usage: python <Parser>.py <in_xml_file>
+ """
+ 
+ def usage():
+-    print USAGE_TEXT
++    print(USAGE_TEXT)
+     sys.exit(-1)
+ 
+ 
+diff --git a/gds_collect_namespace_mappings.py b/gds_collect_namespace_mappings.py
+index 7810930..06faec8 100755
+--- a/gds_collect_namespace_mappings.py
++++ b/gds_collect_namespace_mappings.py
+@@ -88,8 +88,8 @@ def map_schema(schema_file_name, mapping, opts, generateds_envir):
+             mapping[namespace].extend(ct_descriptions)
+     except OSError:
+         if not opts.silence:
+-            print('cannot access "{}": No such file or location'.format(
+-                schema_file_name))
++            print(('cannot access "{}": No such file or location'.format(
++                schema_file_name)))
+ 
+ 
+ def show_mapping(outfile, mapping):
+diff --git a/tests/EnumImport/enum_import00_2.py b/tests/EnumImport/enum_import00_2.py
+index 4ff7d71..f555a20 100644
+--- a/tests/EnumImport/enum_import00_2.py
++++ b/tests/EnumImport/enum_import00_2.py
+@@ -153,7 +153,7 @@ except ModulenotfoundExp_ :
+ 
+         def print_messages(self):
+             for msg in self.messages:
+-                print("Warning: {}".format(msg))
++                print(("Warning: {}".format(msg)))
+ 
+         def write_messages(self, outstream):
+             for msg in self.messages:
+diff --git a/tests/EnumImport/enum_import01_2.py b/tests/EnumImport/enum_import01_2.py
+index 0a562f3..504effc 100644
+--- a/tests/EnumImport/enum_import01_2.py
++++ b/tests/EnumImport/enum_import01_2.py
+@@ -153,7 +153,7 @@ except ModulenotfoundExp_ :
+ 
+         def print_messages(self):
+             for msg in self.messages:
+-                print("Warning: {}".format(msg))
++                print(("Warning: {}".format(msg)))
+ 
+         def write_messages(self, outstream):
+             for msg in self.messages:
+diff --git a/tests/EnumImport/enum_import02_2.py b/tests/EnumImport/enum_import02_2.py
+index a6692cf..f4ca5f5 100644
+--- a/tests/EnumImport/enum_import02_2.py
++++ b/tests/EnumImport/enum_import02_2.py
+@@ -153,7 +153,7 @@ except ModulenotfoundExp_ :
+ 
+         def print_messages(self):
+             for msg in self.messages:
+-                print("Warning: {}".format(msg))
++                print(("Warning: {}".format(msg)))
+ 
+         def write_messages(self, outstream):
+             for msg in self.messages:
+diff --git a/tests/OnePer/oneperType00_1One.py b/tests/OnePer/oneperType00_1One.py
+index bdcd846..6c4679e 100644
+--- a/tests/OnePer/oneperType00_1One.py
++++ b/tests/OnePer/oneperType00_1One.py
+@@ -152,7 +152,7 @@ except ModulenotfoundExp_ :
+ 
+         def print_messages(self):
+             for msg in self.messages:
+-                print("Warning: {}".format(msg))
++                print(("Warning: {}".format(msg)))
+ 
+         def write_messages(self, outstream):
+             for msg in self.messages:
+diff --git a/tests/OnePer/oneperType00_2One.py b/tests/OnePer/oneperType00_2One.py
+index bdcd846..6c4679e 100644
+--- a/tests/OnePer/oneperType00_2One.py
++++ b/tests/OnePer/oneperType00_2One.py
+@@ -152,7 +152,7 @@ except ModulenotfoundExp_ :
+ 
+         def print_messages(self):
+             for msg in self.messages:
+-                print("Warning: {}".format(msg))
++                print(("Warning: {}".format(msg)))
+ 
+         def write_messages(self, outstream):
+             for msg in self.messages:
+diff --git a/tests/OnePer/oneperType01_1One.py b/tests/OnePer/oneperType01_1One.py
+index 851a77d..d416f5b 100644
+--- a/tests/OnePer/oneperType01_1One.py
++++ b/tests/OnePer/oneperType01_1One.py
+@@ -152,7 +152,7 @@ except ModulenotfoundExp_ :
+ 
+         def print_messages(self):
+             for msg in self.messages:
+-                print("Warning: {}".format(msg))
++                print(("Warning: {}".format(msg)))
+ 
+         def write_messages(self, outstream):
+             for msg in self.messages:
+diff --git a/tests/OnePer/oneperType01_2One.py b/tests/OnePer/oneperType01_2One.py
+index 851a77d..d416f5b 100644
+--- a/tests/OnePer/oneperType01_2One.py
++++ b/tests/OnePer/oneperType01_2One.py
+@@ -152,7 +152,7 @@ except ModulenotfoundExp_ :
+ 
+         def print_messages(self):
+             for msg in self.messages:
+-                print("Warning: {}".format(msg))
++                print(("Warning: {}".format(msg)))
+ 
+         def write_messages(self, outstream):
+             for msg in self.messages:
+diff --git a/tests/OnePer/oneperType02_1One.py b/tests/OnePer/oneperType02_1One.py
+index 378112e..4e46183 100644
+--- a/tests/OnePer/oneperType02_1One.py
++++ b/tests/OnePer/oneperType02_1One.py
+@@ -152,7 +152,7 @@ except ModulenotfoundExp_ :
+ 
+         def print_messages(self):
+             for msg in self.messages:
+-                print("Warning: {}".format(msg))
++                print(("Warning: {}".format(msg)))
+ 
+         def write_messages(self, outstream):
+             for msg in self.messages:
+diff --git a/tests/OnePer/oneperType02_2One.py b/tests/OnePer/oneperType02_2One.py
+index 378112e..4e46183 100644
+--- a/tests/OnePer/oneperType02_2One.py
++++ b/tests/OnePer/oneperType02_2One.py
+@@ -152,7 +152,7 @@ except ModulenotfoundExp_ :
+ 
+         def print_messages(self):
+             for msg in self.messages:
+-                print("Warning: {}".format(msg))
++                print(("Warning: {}".format(msg)))
+ 
+         def write_messages(self, outstream):
+             for msg in self.messages:
+diff --git a/tests/OnePer/oneperType03_1One.py b/tests/OnePer/oneperType03_1One.py
+index 6d87228..6b726b2 100644
+--- a/tests/OnePer/oneperType03_1One.py
++++ b/tests/OnePer/oneperType03_1One.py
+@@ -152,7 +152,7 @@ except ModulenotfoundExp_ :
+ 
+         def print_messages(self):
+             for msg in self.messages:
+-                print("Warning: {}".format(msg))
++                print(("Warning: {}".format(msg)))
+ 
+         def write_messages(self, outstream):
+             for msg in self.messages:
+diff --git a/tests/OnePer/oneperType03_2One.py b/tests/OnePer/oneperType03_2One.py
+index 6d87228..6b726b2 100644
+--- a/tests/OnePer/oneperType03_2One.py
++++ b/tests/OnePer/oneperType03_2One.py
+@@ -152,7 +152,7 @@ except ModulenotfoundExp_ :
+ 
+         def print_messages(self):
+             for msg in self.messages:
+-                print("Warning: {}".format(msg))
++                print(("Warning: {}".format(msg)))
+ 
+         def write_messages(self, outstream):
+             for msg in self.messages:
+diff --git a/tests/abstract_type1_sup.py b/tests/abstract_type1_sup.py
+index d336260..3a636ee 100644
+--- a/tests/abstract_type1_sup.py
++++ b/tests/abstract_type1_sup.py
+@@ -151,7 +151,7 @@ except ModulenotfoundExp_ :
+ 
+         def print_messages(self):
+             for msg in self.messages:
+-                print("Warning: {}".format(msg))
++                print(("Warning: {}".format(msg)))
+ 
+         def write_messages(self, outstream):
+             for msg in self.messages:
+diff --git a/tests/abstract_type2_sup.py b/tests/abstract_type2_sup.py
+index d336260..3a636ee 100644
+--- a/tests/abstract_type2_sup.py
++++ b/tests/abstract_type2_sup.py
+@@ -151,7 +151,7 @@ except ModulenotfoundExp_ :
+ 
+         def print_messages(self):
+             for msg in self.messages:
+-                print("Warning: {}".format(msg))
++                print(("Warning: {}".format(msg)))
+ 
+         def write_messages(self, outstream):
+             for msg in self.messages:
+diff --git a/tests/annotations1_sup.py b/tests/annotations1_sup.py
+index 579495b..03b6f9b 100644
+--- a/tests/annotations1_sup.py
++++ b/tests/annotations1_sup.py
+@@ -151,7 +151,7 @@ except ModulenotfoundExp_ :
+ 
+         def print_messages(self):
+             for msg in self.messages:
+-                print("Warning: {}".format(msg))
++                print(("Warning: {}".format(msg)))
+ 
+         def write_messages(self, outstream):
+             for msg in self.messages:
+diff --git a/tests/anonymous_type1_sup.py b/tests/anonymous_type1_sup.py
+index dfb2cde..e205261 100644
+--- a/tests/anonymous_type1_sup.py
++++ b/tests/anonymous_type1_sup.py
+@@ -152,7 +152,7 @@ except ModulenotfoundExp_ :
+ 
+         def print_messages(self):
+             for msg in self.messages:
+-                print("Warning: {}".format(msg))
++                print(("Warning: {}".format(msg)))
+ 
+         def write_messages(self, outstream):
+             for msg in self.messages:
+diff --git a/tests/anycontent1_sup.py b/tests/anycontent1_sup.py
+index 80e02b6..d8d44cd 100644
+--- a/tests/anycontent1_sup.py
++++ b/tests/anycontent1_sup.py
+@@ -151,7 +151,7 @@ except ModulenotfoundExp_ :
+ 
+         def print_messages(self):
+             for msg in self.messages:
+-                print("Warning: {}".format(msg))
++                print(("Warning: {}".format(msg)))
+ 
+         def write_messages(self, outstream):
+             for msg in self.messages:
+diff --git a/tests/anysimpletype1_sup.py b/tests/anysimpletype1_sup.py
+index 699079f..38da732 100644
+--- a/tests/anysimpletype1_sup.py
++++ b/tests/anysimpletype1_sup.py
+@@ -152,7 +152,7 @@ except ModulenotfoundExp_ :
+ 
+         def print_messages(self):
+             for msg in self.messages:
+-                print("Warning: {}".format(msg))
++                print(("Warning: {}".format(msg)))
+ 
+         def write_messages(self, outstream):
+             for msg in self.messages:
+diff --git a/tests/anywildcard1_sup.py b/tests/anywildcard1_sup.py
+index 74c4828..7720850 100644
+--- a/tests/anywildcard1_sup.py
++++ b/tests/anywildcard1_sup.py
+@@ -151,7 +151,7 @@ except ModulenotfoundExp_ :
+ 
+         def print_messages(self):
+             for msg in self.messages:
+-                print("Warning: {}".format(msg))
++                print(("Warning: {}".format(msg)))
+ 
+         def write_messages(self, outstream):
+             for msg in self.messages:
+diff --git a/tests/attr_groups1_sup.py b/tests/attr_groups1_sup.py
+index 16c357f..d2fc4d6 100644
+--- a/tests/attr_groups1_sup.py
++++ b/tests/attr_groups1_sup.py
+@@ -151,7 +151,7 @@ except ModulenotfoundExp_ :
+ 
+         def print_messages(self):
+             for msg in self.messages:
+-                print("Warning: {}".format(msg))
++                print(("Warning: {}".format(msg)))
+ 
+         def write_messages(self, outstream):
+             for msg in self.messages:
+diff --git a/tests/attr_groups2_sup.py b/tests/attr_groups2_sup.py
+index 16c357f..d2fc4d6 100644
+--- a/tests/attr_groups2_sup.py
++++ b/tests/attr_groups2_sup.py
+@@ -151,7 +151,7 @@ except ModulenotfoundExp_ :
+ 
+         def print_messages(self):
+             for msg in self.messages:
+-                print("Warning: {}".format(msg))
++                print(("Warning: {}".format(msg)))
+ 
+         def write_messages(self, outstream):
+             for msg in self.messages:
+diff --git a/tests/attr_prefix1_sup.py b/tests/attr_prefix1_sup.py
+index 5305154..9a6dbfa 100644
+--- a/tests/attr_prefix1_sup.py
++++ b/tests/attr_prefix1_sup.py
+@@ -154,7 +154,7 @@ except ModulenotfoundExp_ :
+ 
+         def print_messages(self):
+             for msg in self.messages:
+-                print("Warning: {}".format(msg))
++                print(("Warning: {}".format(msg)))
+ 
+         def write_messages(self, outstream):
+             for msg in self.messages:
+diff --git a/tests/catalogtest1_sup.py b/tests/catalogtest1_sup.py
+index 3d0b904..e261173 100644
+--- a/tests/catalogtest1_sup.py
++++ b/tests/catalogtest1_sup.py
+@@ -152,7 +152,7 @@ except ModulenotfoundExp_ :
+ 
+         def print_messages(self):
+             for msg in self.messages:
+-                print("Warning: {}".format(msg))
++                print(("Warning: {}".format(msg)))
+ 
+         def write_messages(self, outstream):
+             for msg in self.messages:
+diff --git a/tests/catalogtest2_sup.py b/tests/catalogtest2_sup.py
+index 3d0b904..e261173 100644
+--- a/tests/catalogtest2_sup.py
++++ b/tests/catalogtest2_sup.py
+@@ -152,7 +152,7 @@ except ModulenotfoundExp_ :
+ 
+         def print_messages(self):
+             for msg in self.messages:
+-                print("Warning: {}".format(msg))
++                print(("Warning: {}".format(msg)))
+ 
+         def write_messages(self, outstream):
+             for msg in self.messages:
+diff --git a/tests/cdata1_sup.py b/tests/cdata1_sup.py
+index f7c14a4..2394536 100644
+--- a/tests/cdata1_sup.py
++++ b/tests/cdata1_sup.py
+@@ -152,7 +152,7 @@ except ModulenotfoundExp_ :
+ 
+         def print_messages(self):
+             for msg in self.messages:
+-                print("Warning: {}".format(msg))
++                print(("Warning: {}".format(msg)))
+ 
+         def write_messages(self, outstream):
+             for msg in self.messages:
+diff --git a/tests/cleanupname1_sup.py b/tests/cleanupname1_sup.py
+index 4e0ebf4..9c6b620 100644
+--- a/tests/cleanupname1_sup.py
++++ b/tests/cleanupname1_sup.py
+@@ -152,7 +152,7 @@ except ModulenotfoundExp_ :
+ 
+         def print_messages(self):
+             for msg in self.messages:
+-                print("Warning: {}".format(msg))
++                print(("Warning: {}".format(msg)))
+ 
+         def write_messages(self, outstream):
+             for msg in self.messages:
+diff --git a/tests/decimal_format1_sup.py b/tests/decimal_format1_sup.py
+index 75eb975..66409a4 100644
+--- a/tests/decimal_format1_sup.py
++++ b/tests/decimal_format1_sup.py
+@@ -152,7 +152,7 @@ except ModulenotfoundExp_ :
+ 
+         def print_messages(self):
+             for msg in self.messages:
+-                print("Warning: {}".format(msg))
++                print(("Warning: {}".format(msg)))
+ 
+         def write_messages(self, outstream):
+             for msg in self.messages:
+diff --git a/tests/defaults_cases1_sup.py b/tests/defaults_cases1_sup.py
+index 6c4258a..5331355 100644
+--- a/tests/defaults_cases1_sup.py
++++ b/tests/defaults_cases1_sup.py
+@@ -150,7 +150,7 @@ except ModulenotfoundExp_ :
+ 
+         def print_messages(self):
+             for msg in self.messages:
+-                print("Warning: {}".format(msg))
++                print(("Warning: {}".format(msg)))
+ 
+         def write_messages(self, outstream):
+             for msg in self.messages:
+diff --git a/tests/defaults_cases_always1_sup.py b/tests/defaults_cases_always1_sup.py
+index 9bd202a..3aa8ba5 100644
+--- a/tests/defaults_cases_always1_sup.py
++++ b/tests/defaults_cases_always1_sup.py
+@@ -151,7 +151,7 @@ except ModulenotfoundExp_ :
+ 
+         def print_messages(self):
+             for msg in self.messages:
+-                print("Warning: {}".format(msg))
++                print(("Warning: {}".format(msg)))
+ 
+         def write_messages(self, outstream):
+             for msg in self.messages:
+diff --git a/tests/defaults_coverage1_sup.py b/tests/defaults_coverage1_sup.py
+index 8872669..1d3f900 100644
+--- a/tests/defaults_coverage1_sup.py
++++ b/tests/defaults_coverage1_sup.py
+@@ -151,7 +151,7 @@ except ModulenotfoundExp_ :
+ 
+         def print_messages(self):
+             for msg in self.messages:
+-                print("Warning: {}".format(msg))
++                print(("Warning: {}".format(msg)))
+ 
+         def write_messages(self, outstream):
+             for msg in self.messages:
+diff --git a/tests/derived_types1_sup.py b/tests/derived_types1_sup.py
+index a36852b..3896568 100644
+--- a/tests/derived_types1_sup.py
++++ b/tests/derived_types1_sup.py
+@@ -151,7 +151,7 @@ except ModulenotfoundExp_ :
+ 
+         def print_messages(self):
+             for msg in self.messages:
+-                print("Warning: {}".format(msg))
++                print(("Warning: {}".format(msg)))
+ 
+         def write_messages(self, outstream):
+             for msg in self.messages:
+diff --git a/tests/disable_xml_super1_sup.py b/tests/disable_xml_super1_sup.py
+index 24b8c0a..d889f85 100644
+--- a/tests/disable_xml_super1_sup.py
++++ b/tests/disable_xml_super1_sup.py
+@@ -154,7 +154,7 @@ except ModulenotfoundExp_ :
+ 
+         def print_messages(self):
+             for msg in self.messages:
+-                print("Warning: {}".format(msg))
++                print(("Warning: {}".format(msg)))
+ 
+         def write_messages(self, outstream):
+             for msg in self.messages:
+diff --git a/tests/enable_slots1_sup.py b/tests/enable_slots1_sup.py
+index 292f96a..d3f9cce 100644
+--- a/tests/enable_slots1_sup.py
++++ b/tests/enable_slots1_sup.py
+@@ -155,7 +155,7 @@ except ModulenotfoundExp_ :
+ 
+         def print_messages(self):
+             for msg in self.messages:
+-                print("Warning: {}".format(msg))
++                print(("Warning: {}".format(msg)))
+ 
+         def write_messages(self, outstream):
+             for msg in self.messages:
+diff --git a/tests/enable_slots_nodisablexml1_sup.py b/tests/enable_slots_nodisablexml1_sup.py
+index aec7c26..7865a8c 100644
+--- a/tests/enable_slots_nodisablexml1_sup.py
++++ b/tests/enable_slots_nodisablexml1_sup.py
+@@ -154,7 +154,7 @@ except ModulenotfoundExp_ :
+ 
+         def print_messages(self):
+             for msg in self.messages:
+-                print("Warning: {}".format(msg))
++                print(("Warning: {}".format(msg)))
+ 
+         def write_messages(self, outstream):
+             for msg in self.messages:
+diff --git a/tests/episodic_second.py b/tests/episodic_second.py
+index 4945381..ff78980 100644
+--- a/tests/episodic_second.py
++++ b/tests/episodic_second.py
+@@ -152,7 +152,7 @@ except ModulenotfoundExp_ :
+ 
+         def print_messages(self):
+             for msg in self.messages:
+-                print("Warning: {}".format(msg))
++                print(("Warning: {}".format(msg)))
+ 
+         def write_messages(self, outstream):
+             for msg in self.messages:
+diff --git a/tests/extensions1_sup.py b/tests/extensions1_sup.py
+index 9f5cf4c..1a8fc3c 100644
+--- a/tests/extensions1_sup.py
++++ b/tests/extensions1_sup.py
+@@ -151,7 +151,7 @@ except ModulenotfoundExp_ :
+ 
+         def print_messages(self):
+             for msg in self.messages:
+-                print("Warning: {}".format(msg))
++                print(("Warning: {}".format(msg)))
+ 
+         def write_messages(self, outstream):
+             for msg in self.messages:
+diff --git a/tests/ipo1_sup.py b/tests/ipo1_sup.py
+index 8c5f4d6..b2f6540 100644
+--- a/tests/ipo1_sup.py
++++ b/tests/ipo1_sup.py
+@@ -150,7 +150,7 @@ except ModulenotfoundExp_ :
+ 
+         def print_messages(self):
+             for msg in self.messages:
+-                print("Warning: {}".format(msg))
++                print(("Warning: {}".format(msg)))
+ 
+         def write_messages(self, outstream):
+             for msg in self.messages:
+diff --git a/tests/mapcleanname1_sup.py b/tests/mapcleanname1_sup.py
+index 1c35ed2..e0d9f89 100644
+--- a/tests/mapcleanname1_sup.py
++++ b/tests/mapcleanname1_sup.py
+@@ -151,7 +151,7 @@ except ModulenotfoundExp_ :
+ 
+         def print_messages(self):
+             for msg in self.messages:
+-                print("Warning: {}".format(msg))
++                print(("Warning: {}".format(msg)))
+ 
+         def write_messages(self, outstream):
+             for msg in self.messages:
+diff --git a/tests/mixedcontent1_sup.py b/tests/mixedcontent1_sup.py
+index 497c342..8940e5f 100644
+--- a/tests/mixedcontent1_sup.py
++++ b/tests/mixedcontent1_sup.py
+@@ -150,7 +150,7 @@ except ModulenotfoundExp_ :
+ 
+         def print_messages(self):
+             for msg in self.messages:
+-                print("Warning: {}".format(msg))
++                print(("Warning: {}".format(msg)))
+ 
+         def write_messages(self, outstream):
+             for msg in self.messages:
+diff --git a/tests/nested_def1_sup.py b/tests/nested_def1_sup.py
+index 1b9c422..6ee8464 100644
+--- a/tests/nested_def1_sup.py
++++ b/tests/nested_def1_sup.py
+@@ -150,7 +150,7 @@ except ModulenotfoundExp_ :
+ 
+         def print_messages(self):
+             for msg in self.messages:
+-                print("Warning: {}".format(msg))
++                print(("Warning: {}".format(msg)))
+ 
+         def write_messages(self, outstream):
+             for msg in self.messages:
+diff --git a/tests/no_namespace_defs1_sup.py b/tests/no_namespace_defs1_sup.py
+index 5e4a51a..3b3314e 100644
+--- a/tests/no_namespace_defs1_sup.py
++++ b/tests/no_namespace_defs1_sup.py
+@@ -154,7 +154,7 @@ except ModulenotfoundExp_ :
+ 
+         def print_messages(self):
+             for msg in self.messages:
+-                print("Warning: {}".format(msg))
++                print(("Warning: {}".format(msg)))
+ 
+         def write_messages(self, outstream):
+             for msg in self.messages:
+diff --git a/tests/out1_sup.py b/tests/out1_sup.py
+index 67000d3..10255c0 100644
+--- a/tests/out1_sup.py
++++ b/tests/out1_sup.py
+@@ -151,7 +151,7 @@ except ModulenotfoundExp_ :
+ 
+         def print_messages(self):
+             for msg in self.messages:
+-                print("Warning: {}".format(msg))
++                print(("Warning: {}".format(msg)))
+ 
+         def write_messages(self, outstream):
+             for msg in self.messages:
+@@ -1314,7 +1314,7 @@ class people(GeneratedsSuper):
+         global counter
+         counter += 1
+         depth += 1
+-        print('%d. class: people  depth: %d' % (counter, depth, ))
++        print(('%d. class: people  depth: %d' % (counter, depth, )))
+         members = people._member_data_items
+         for member in members:
+             s1 = member.get_name()
+@@ -1329,7 +1329,7 @@ class people(GeneratedsSuper):
+                 else:
+                     s4 = '<instance>'
+             s5 = '%s%s%s  %s' % (s1.ljust(16), s2.ljust(16), s3.rjust(4), s4, )
+-            print('   ', s5)
++            print(('   ', s5))
+         for member in members:
+             if member.get_container():
+                 for child in getattr(self, member.get_name()):
+@@ -1516,7 +1516,7 @@ class comments(GeneratedsSuper):
+         global counter
+         counter += 1
+         depth += 1
+-        print('%d. class: comments  depth: %d' % (counter, depth, ))
++        print(('%d. class: comments  depth: %d' % (counter, depth, )))
+         members = comments._member_data_items
+         for member in members:
+             s1 = member.get_name()
+@@ -1531,7 +1531,7 @@ class comments(GeneratedsSuper):
+                 else:
+                     s4 = '<instance>'
+             s5 = '%s%s%s  %s' % (s1.ljust(16), s2.ljust(16), s3.rjust(4), s4, )
+-            print('   ', s5)
++            print(('   ', s5))
+         for member in members:
+             if member.get_container():
+                 for child in getattr(self, member.get_name()):
+@@ -1927,7 +1927,7 @@ class person(GeneratedsSuper):
+         global counter
+         counter += 1
+         depth += 1
+-        print('%d. class: person  depth: %d' % (counter, depth, ))
++        print(('%d. class: person  depth: %d' % (counter, depth, )))
+         members = person._member_data_items
+         for member in members:
+             s1 = member.get_name()
+@@ -1942,7 +1942,7 @@ class person(GeneratedsSuper):
+                 else:
+                     s4 = '<instance>'
+             s5 = '%s%s%s  %s' % (s1.ljust(16), s2.ljust(16), s3.rjust(4), s4, )
+-            print('   ', s5)
++            print(('   ', s5))
+         for member in members:
+             if member.get_container():
+                 for child in getattr(self, member.get_name()):
+@@ -2487,7 +2487,7 @@ class programmer(person):
+         global counter
+         counter += 1
+         depth += 1
+-        print('%d. class: programmer  depth: %d' % (counter, depth, ))
++        print(('%d. class: programmer  depth: %d' % (counter, depth, )))
+         members = programmer._member_data_items
+         for member in members:
+             s1 = member.get_name()
+@@ -2502,7 +2502,7 @@ class programmer(person):
+                 else:
+                     s4 = '<instance>'
+             s5 = '%s%s%s  %s' % (s1.ljust(16), s2.ljust(16), s3.rjust(4), s4, )
+-            print('   ', s5)
++            print(('   ', s5))
+         for member in members:
+             if member.get_container():
+                 for child in getattr(self, member.get_name()):
+@@ -2735,7 +2735,7 @@ class param(GeneratedsSuper):
+         global counter
+         counter += 1
+         depth += 1
+-        print('%d. class: param  depth: %d' % (counter, depth, ))
++        print(('%d. class: param  depth: %d' % (counter, depth, )))
+         members = param._member_data_items
+         for member in members:
+             s1 = member.get_name()
+@@ -2750,7 +2750,7 @@ class param(GeneratedsSuper):
+                 else:
+                     s4 = '<instance>'
+             s5 = '%s%s%s  %s' % (s1.ljust(16), s2.ljust(16), s3.rjust(4), s4, )
+-            print('   ', s5)
++            print(('   ', s5))
+         for member in members:
+             if member.get_container():
+                 for child in getattr(self, member.get_name()):
+@@ -2914,7 +2914,7 @@ class python_programmer(programmer):
+         global counter
+         counter += 1
+         depth += 1
+-        print('%d. class: python_programmer  depth: %d' % (counter, depth, ))
++        print(('%d. class: python_programmer  depth: %d' % (counter, depth, )))
+         members = python_programmer._member_data_items
+         for member in members:
+             s1 = member.get_name()
+@@ -2929,7 +2929,7 @@ class python_programmer(programmer):
+                 else:
+                     s4 = '<instance>'
+             s5 = '%s%s%s  %s' % (s1.ljust(16), s2.ljust(16), s3.rjust(4), s4, )
+-            print('   ', s5)
++            print(('   ', s5))
+         for member in members:
+             if member.get_container():
+                 for child in getattr(self, member.get_name()):
+@@ -3111,7 +3111,7 @@ class java_programmer(programmer):
+         global counter
+         counter += 1
+         depth += 1
+-        print('%d. class: java_programmer  depth: %d' % (counter, depth, ))
++        print(('%d. class: java_programmer  depth: %d' % (counter, depth, )))
+         members = java_programmer._member_data_items
+         for member in members:
+             s1 = member.get_name()
+@@ -3126,7 +3126,7 @@ class java_programmer(programmer):
+                 else:
+                     s4 = '<instance>'
+             s5 = '%s%s%s  %s' % (s1.ljust(16), s2.ljust(16), s3.rjust(4), s4, )
+-            print('   ', s5)
++            print(('   ', s5))
+         for member in members:
+             if member.get_container():
+                 for child in getattr(self, member.get_name()):
+@@ -3331,7 +3331,7 @@ class agent(GeneratedsSuper):
+         global counter
+         counter += 1
+         depth += 1
+-        print('%d. class: agent  depth: %d' % (counter, depth, ))
++        print(('%d. class: agent  depth: %d' % (counter, depth, )))
+         members = agent._member_data_items
+         for member in members:
+             s1 = member.get_name()
+@@ -3346,7 +3346,7 @@ class agent(GeneratedsSuper):
+                 else:
+                     s4 = '<instance>'
+             s5 = '%s%s%s  %s' % (s1.ljust(16), s2.ljust(16), s3.rjust(4), s4, )
+-            print('   ', s5)
++            print(('   ', s5))
+         for member in members:
+             if member.get_container():
+                 for child in getattr(self, member.get_name()):
+@@ -3551,7 +3551,7 @@ class special_agent(GeneratedsSuper):
+         global counter
+         counter += 1
+         depth += 1
+-        print('%d. class: special_agent  depth: %d' % (counter, depth, ))
++        print(('%d. class: special_agent  depth: %d' % (counter, depth, )))
+         members = special_agent._member_data_items
+         for member in members:
+             s1 = member.get_name()
+@@ -3566,7 +3566,7 @@ class special_agent(GeneratedsSuper):
+                 else:
+                     s4 = '<instance>'
+             s5 = '%s%s%s  %s' % (s1.ljust(16), s2.ljust(16), s3.rjust(4), s4, )
+-            print('   ', s5)
++            print(('   ', s5))
+         for member in members:
+             if member.get_container():
+                 for child in getattr(self, member.get_name()):
+@@ -3879,7 +3879,7 @@ class booster(GeneratedsSuper):
+         global counter
+         counter += 1
+         depth += 1
+-        print('%d. class: booster  depth: %d' % (counter, depth, ))
++        print(('%d. class: booster  depth: %d' % (counter, depth, )))
+         members = booster._member_data_items
+         for member in members:
+             s1 = member.get_name()
+@@ -3894,7 +3894,7 @@ class booster(GeneratedsSuper):
+                 else:
+                     s4 = '<instance>'
+             s5 = '%s%s%s  %s' % (s1.ljust(16), s2.ljust(16), s3.rjust(4), s4, )
+-            print('   ', s5)
++            print(('   ', s5))
+         for member in members:
+             if member.get_container():
+                 for child in getattr(self, member.get_name()):
+@@ -4065,7 +4065,7 @@ class info(GeneratedsSuper):
+         global counter
+         counter += 1
+         depth += 1
+-        print('%d. class: info  depth: %d' % (counter, depth, ))
++        print(('%d. class: info  depth: %d' % (counter, depth, )))
+         members = info._member_data_items
+         for member in members:
+             s1 = member.get_name()
+@@ -4080,7 +4080,7 @@ class info(GeneratedsSuper):
+                 else:
+                     s4 = '<instance>'
+             s5 = '%s%s%s  %s' % (s1.ljust(16), s2.ljust(16), s3.rjust(4), s4, )
+-            print('   ', s5)
++            print(('   ', s5))
+         for member in members:
+             if member.get_container():
+                 for child in getattr(self, member.get_name()):
+@@ -4242,7 +4242,7 @@ class client_handlerType(GeneratedsSuper):
+         global counter
+         counter += 1
+         depth += 1
+-        print('%d. class: client_handlerType  depth: %d' % (counter, depth, ))
++        print(('%d. class: client_handlerType  depth: %d' % (counter, depth, )))
+         members = client_handlerType._member_data_items
+         for member in members:
+             s1 = member.get_name()
+@@ -4257,7 +4257,7 @@ class client_handlerType(GeneratedsSuper):
+                 else:
+                     s4 = '<instance>'
+             s5 = '%s%s%s  %s' % (s1.ljust(16), s2.ljust(16), s3.rjust(4), s4, )
+-            print('   ', s5)
++            print(('   ', s5))
+         for member in members:
+             if member.get_container():
+                 for child in getattr(self, member.get_name()):
+diff --git a/tests/people_graphql1.py b/tests/people_graphql1.py
+index 87e3ec5..ac28845 100644
+--- a/tests/people_graphql1.py
++++ b/tests/people_graphql1.py
+@@ -158,7 +158,7 @@ except ModulenotfoundExp_ :
+ 
+         def print_messages(self):
+             for msg in self.messages:
+-                print("Warning: {}".format(msg))
++                print(("Warning: {}".format(msg)))
+ 
+         def write_messages(self, outstream):
+             for msg in self.messages:
+diff --git a/tests/people_graphql2.py b/tests/people_graphql2.py
+index 87e3ec5..ac28845 100644
+--- a/tests/people_graphql2.py
++++ b/tests/people_graphql2.py
+@@ -158,7 +158,7 @@ except ModulenotfoundExp_ :
+ 
+         def print_messages(self):
+             for msg in self.messages:
+-                print("Warning: {}".format(msg))
++                print(("Warning: {}".format(msg)))
+ 
+         def write_messages(self, outstream):
+             for msg in self.messages:
+diff --git a/tests/people_procincl1_sup.py b/tests/people_procincl1_sup.py
+index 739cc93..1660a5b 100644
+--- a/tests/people_procincl1_sup.py
++++ b/tests/people_procincl1_sup.py
+@@ -151,7 +151,7 @@ except ModulenotfoundExp_ :
+ 
+         def print_messages(self):
+             for msg in self.messages:
+-                print("Warning: {}".format(msg))
++                print(("Warning: {}".format(msg)))
+ 
+         def write_messages(self, outstream):
+             for msg in self.messages:
+diff --git a/tests/people_procincl2_sup.py b/tests/people_procincl2_sup.py
+index 739cc93..1660a5b 100644
+--- a/tests/people_procincl2_sup.py
++++ b/tests/people_procincl2_sup.py
+@@ -151,7 +151,7 @@ except ModulenotfoundExp_ :
+ 
+         def print_messages(self):
+             for msg in self.messages:
+-                print("Warning: {}".format(msg))
++                print(("Warning: {}".format(msg)))
+ 
+         def write_messages(self, outstream):
+             for msg in self.messages:
+diff --git a/tests/prefix_classname1_sup.py b/tests/prefix_classname1_sup.py
+index 99a11ea..ec35ab0 100644
+--- a/tests/prefix_classname1_sup.py
++++ b/tests/prefix_classname1_sup.py
+@@ -151,7 +151,7 @@ except ModulenotfoundExp_ :
+ 
+         def print_messages(self):
+             for msg in self.messages:
+-                print("Warning: {}".format(msg))
++                print(("Warning: {}".format(msg)))
+ 
+         def write_messages(self, outstream):
+             for msg in self.messages:
+diff --git a/tests/preserve_cdata_tags1_sup.py b/tests/preserve_cdata_tags1_sup.py
+index dc2fa30..7ab4cf7 100644
+--- a/tests/preserve_cdata_tags1_sup.py
++++ b/tests/preserve_cdata_tags1_sup.py
+@@ -152,7 +152,7 @@ except ModulenotfoundExp_ :
+ 
+         def print_messages(self):
+             for msg in self.messages:
+-                print("Warning: {}".format(msg))
++                print(("Warning: {}".format(msg)))
+ 
+         def write_messages(self, outstream):
+             for msg in self.messages:
+diff --git a/tests/recursive_generator_method1_sup.py b/tests/recursive_generator_method1_sup.py
+index 63a7448..9a37a29 100644
+--- a/tests/recursive_generator_method1_sup.py
++++ b/tests/recursive_generator_method1_sup.py
+@@ -152,7 +152,7 @@ except ModulenotfoundExp_ :
+ 
+         def print_messages(self):
+             for msg in self.messages:
+-                print("Warning: {}".format(msg))
++                print(("Warning: {}".format(msg)))
+ 
+         def write_messages(self, outstream):
+             for msg in self.messages:
+diff --git a/tests/recursive_simpletype1_sup.py b/tests/recursive_simpletype1_sup.py
+index 5eb6677..385316e 100644
+--- a/tests/recursive_simpletype1_sup.py
++++ b/tests/recursive_simpletype1_sup.py
+@@ -151,7 +151,7 @@ except ModulenotfoundExp_ :
+ 
+         def print_messages(self):
+             for msg in self.messages:
+-                print("Warning: {}".format(msg))
++                print(("Warning: {}".format(msg)))
+ 
+         def write_messages(self, outstream):
+             for msg in self.messages:
+diff --git a/tests/recursive_simpletype2_sup.py b/tests/recursive_simpletype2_sup.py
+index 5eb6677..385316e 100644
+--- a/tests/recursive_simpletype2_sup.py
++++ b/tests/recursive_simpletype2_sup.py
+@@ -151,7 +151,7 @@ except ModulenotfoundExp_ :
+ 
+         def print_messages(self):
+             for msg in self.messages:
+-                print("Warning: {}".format(msg))
++                print(("Warning: {}".format(msg)))
+ 
+         def write_messages(self, outstream):
+             for msg in self.messages:
+diff --git a/tests/reference_simpletype1_sup.py b/tests/reference_simpletype1_sup.py
+index cba3933..8bfc2ce 100644
+--- a/tests/reference_simpletype1_sup.py
++++ b/tests/reference_simpletype1_sup.py
+@@ -152,7 +152,7 @@ except ModulenotfoundExp_ :
+ 
+         def print_messages(self):
+             for msg in self.messages:
+-                print("Warning: {}".format(msg))
++                print(("Warning: {}".format(msg)))
+ 
+         def write_messages(self, outstream):
+             for msg in self.messages:
+diff --git a/tests/relative_import1_sup.py b/tests/relative_import1_sup.py
+index 6e92bd6..5aeeff7 100644
+--- a/tests/relative_import1_sup.py
++++ b/tests/relative_import1_sup.py
+@@ -154,7 +154,7 @@ except ModulenotfoundExp_ :
+ 
+         def print_messages(self):
+             for msg in self.messages:
+-                print("Warning: {}".format(msg))
++                print(("Warning: {}".format(msg)))
+ 
+         def write_messages(self, outstream):
+             for msg in self.messages:
+diff --git a/tests/rem_dup_elems1_sup.py b/tests/rem_dup_elems1_sup.py
+index b1f7169..b6d700d 100644
+--- a/tests/rem_dup_elems1_sup.py
++++ b/tests/rem_dup_elems1_sup.py
+@@ -152,7 +152,7 @@ except ModulenotfoundExp_ :
+ 
+         def print_messages(self):
+             for msg in self.messages:
+-                print("Warning: {}".format(msg))
++                print(("Warning: {}".format(msg)))
+ 
+         def write_messages(self, outstream):
+             for msg in self.messages:
+diff --git a/tests/simplecontent_restriction1_sup.py b/tests/simplecontent_restriction1_sup.py
+index e6410c2..b249d70 100644
+--- a/tests/simplecontent_restriction1_sup.py
++++ b/tests/simplecontent_restriction1_sup.py
+@@ -152,7 +152,7 @@ except ModulenotfoundExp_ :
+ 
+         def print_messages(self):
+             for msg in self.messages:
+-                print("Warning: {}".format(msg))
++                print(("Warning: {}".format(msg)))
+ 
+         def write_messages(self, outstream):
+             for msg in self.messages:
+diff --git a/tests/simpletype_list1_sup.py b/tests/simpletype_list1_sup.py
+index 6cb2af7..6842915 100644
+--- a/tests/simpletype_list1_sup.py
++++ b/tests/simpletype_list1_sup.py
+@@ -152,7 +152,7 @@ except ModulenotfoundExp_ :
+ 
+         def print_messages(self):
+             for msg in self.messages:
+-                print("Warning: {}".format(msg))
++                print(("Warning: {}".format(msg)))
+ 
+         def write_messages(self, outstream):
+             for msg in self.messages:
+diff --git a/tests/simpletype_memberspecs1_sup.py b/tests/simpletype_memberspecs1_sup.py
+index efad35f..b1e13fd 100644
+--- a/tests/simpletype_memberspecs1_sup.py
++++ b/tests/simpletype_memberspecs1_sup.py
+@@ -151,7 +151,7 @@ except ModulenotfoundExp_ :
+ 
+         def print_messages(self):
+             for msg in self.messages:
+-                print("Warning: {}".format(msg))
++                print(("Warning: {}".format(msg)))
+ 
+         def write_messages(self, outstream):
+             for msg in self.messages:
+diff --git a/tests/simpletypes_other1_sup.py b/tests/simpletypes_other1_sup.py
+index 73e199e..bd8d007 100644
+--- a/tests/simpletypes_other1_sup.py
++++ b/tests/simpletypes_other1_sup.py
+@@ -151,7 +151,7 @@ except ModulenotfoundExp_ :
+ 
+         def print_messages(self):
+             for msg in self.messages:
+-                print("Warning: {}".format(msg))
++                print(("Warning: {}".format(msg)))
+ 
+         def write_messages(self, outstream):
+             for msg in self.messages:
+diff --git a/tests/simpletypes_other2_sup.py b/tests/simpletypes_other2_sup.py
+index 73e199e..bd8d007 100644
+--- a/tests/simpletypes_other2_sup.py
++++ b/tests/simpletypes_other2_sup.py
+@@ -151,7 +151,7 @@ except ModulenotfoundExp_ :
+ 
+         def print_messages(self):
+             for msg in self.messages:
+-                print("Warning: {}".format(msg))
++                print(("Warning: {}".format(msg)))
+ 
+         def write_messages(self, outstream):
+             for msg in self.messages:
+diff --git a/tests/split_join1.py b/tests/split_join1.py
+index 63ecab4..f5d7ac6 100644
+--- a/tests/split_join1.py
++++ b/tests/split_join1.py
+@@ -149,7 +149,7 @@ except ModulenotfoundExp_ :
+ 
+         def print_messages(self):
+             for msg in self.messages:
+-                print("Warning: {}".format(msg))
++                print(("Warning: {}".format(msg)))
+ 
+         def write_messages(self, outstream):
+             for msg in self.messages:
+diff --git a/tests/to_etree1_sup.py b/tests/to_etree1_sup.py
+index 0e419c4..0cd4f2a 100644
+--- a/tests/to_etree1_sup.py
++++ b/tests/to_etree1_sup.py
+@@ -153,7 +153,7 @@ except ModulenotfoundExp_ :
+ 
+         def print_messages(self):
+             for msg in self.messages:
+-                print("Warning: {}".format(msg))
++                print(("Warning: {}".format(msg)))
+ 
+         def write_messages(self, outstream):
+             for msg in self.messages:
+diff --git a/tests/type_substitution1_sup.py b/tests/type_substitution1_sup.py
+index 21c4299..2bacf34 100644
+--- a/tests/type_substitution1_sup.py
++++ b/tests/type_substitution1_sup.py
+@@ -152,7 +152,7 @@ except ModulenotfoundExp_ :
+ 
+         def print_messages(self):
+             for msg in self.messages:
+-                print("Warning: {}".format(msg))
++                print(("Warning: {}".format(msg)))
+ 
+         def write_messages(self, outstream):
+             for msg in self.messages:
+diff --git a/tests/validate_simpletypes1_sup.py b/tests/validate_simpletypes1_sup.py
+index 9cc3563..143cdad 100644
+--- a/tests/validate_simpletypes1_sup.py
++++ b/tests/validate_simpletypes1_sup.py
+@@ -152,7 +152,7 @@ except ModulenotfoundExp_ :
+ 
+         def print_messages(self):
+             for msg in self.messages:
+-                print("Warning: {}".format(msg))
++                print(("Warning: {}".format(msg)))
+ 
+         def write_messages(self, outstream):
+             for msg in self.messages:
+diff --git a/tutorial/Code/member_specs_api.py b/tutorial/Code/member_specs_api.py
+index 734fdf5..f3ee43f 100644
+--- a/tutorial/Code/member_specs_api.py
++++ b/tutorial/Code/member_specs_api.py
+@@ -70,7 +70,7 @@ def parsexml_(*args, **kwargs):
+ 
+ try:
+     from generatedssuper import GeneratedsSuper
+-except ImportError, exp:
++except ImportError as exp:
+ 
+     class GeneratedsSuper(object):
+         def gds_format_string(self, input_data, input_name=''):
+@@ -88,7 +88,7 @@ except ImportError, exp:
+             for value in values:
+                 try:
+                     fvalue = float(value)
+-                except (TypeError, ValueError), exp:
++                except (TypeError, ValueError) as exp:
+                     raise_parse_error(node, 'Requires sequence of integers')
+             return input_data
+         def gds_format_float(self, input_data, input_name=''):
+@@ -102,7 +102,7 @@ except ImportError, exp:
+             for value in values:
+                 try:
+                     fvalue = float(value)
+-                except (TypeError, ValueError), exp:
++                except (TypeError, ValueError) as exp:
+                     raise_parse_error(node, 'Requires sequence of floats')
+             return input_data
+         def gds_format_double(self, input_data, input_name=''):
+@@ -116,7 +116,7 @@ except ImportError, exp:
+             for value in values:
+                 try:
+                     fvalue = float(value)
+-                except (TypeError, ValueError), exp:
++                except (TypeError, ValueError) as exp:
+                     raise_parse_error(node, 'Requires sequence of doubles')
+             return input_data
+         def gds_format_boolean(self, input_data, input_name=''):
+@@ -608,7 +608,7 @@ class contactType(GeneratedsSuper):
+             already_processed.append('priority')
+             try:
+                 self.priority = float(value)
+-            except ValueError, exp:
++            except ValueError as exp:
+                 raise ValueError('Bad float/double attribute (priority): %s' % exp)
+         value = find_attr_value_('color-code', node)
+         if value is not None and 'color-code' not in already_processed:
+@@ -619,7 +619,7 @@ class contactType(GeneratedsSuper):
+             already_processed.append('id')
+             try:
+                 self.id = int(value)
+-            except ValueError, exp:
++            except ValueError as exp:
+                 raise_parse_error(node, 'Bad integer attribute: %s' % exp)
+     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
+         if nodeName_ == 'first-name':
+@@ -638,7 +638,7 @@ class contactType(GeneratedsSuper):
+             sval_ = child_.text
+             try:
+                 ival_ = int(sval_)
+-            except (TypeError, ValueError), exp:
++            except (TypeError, ValueError) as exp:
+                 raise_parse_error(child_, 'requires integer: %s' % exp)
+             ival_ = self.gds_validate_integer(ival_, node, 'category')
+             self.category = ival_
+@@ -650,7 +650,7 @@ Usage: python <Parser>.py [ -s ] <in_xml_file>
+ """
+ 
+ def usage():
+-    print USAGE_TEXT
++    print(USAGE_TEXT)
+     sys.exit(1)
+ 
+ 
+diff --git a/tutorial/Code/member_specs_test.py b/tutorial/Code/member_specs_test.py
+index b8921d3..01992e7 100644
+--- a/tutorial/Code/member_specs_test.py
++++ b/tutorial/Code/member_specs_test.py
+@@ -36,7 +36,7 @@ Usage:
+ """
+ 
+ def usage():
+-    print USAGE_MSG
++    print(USAGE_MSG)
+     sys.exit(1)
+ 
+ def main():
+diff --git a/tutorial/Code/member_specs_upper.py b/tutorial/Code/member_specs_upper.py
+index 52cc397..58074d3 100644
+--- a/tutorial/Code/member_specs_upper.py
++++ b/tutorial/Code/member_specs_upper.py
+@@ -178,7 +178,7 @@ Usage: python ???.py <infilename>
+ """
+ 
+ def usage():
+-    print USAGE_TEXT
++    print(USAGE_TEXT)
+     sys.exit(1)
+ 
+ 
+diff --git a/tutorial/Code/people_api.py b/tutorial/Code/people_api.py
+index 0558532..69d9710 100644
+--- a/tutorial/Code/people_api.py
++++ b/tutorial/Code/people_api.py
+@@ -70,7 +70,7 @@ def parsexml_(*args, **kwargs):
+ 
+ try:
+     from generatedssuper import GeneratedsSuper
+-except ImportError, exp:
++except ImportError as exp:
+ 
+     class GeneratedsSuper(object):
+         def gds_format_string(self, input_data, input_name=''):
+@@ -88,7 +88,7 @@ except ImportError, exp:
+             for value in values:
+                 try:
+                     fvalue = float(value)
+-                except (TypeError, ValueError), exp:
++                except (TypeError, ValueError) as exp:
+                     raise_parse_error(node, 'Requires sequence of integers')
+             return input_data
+         def gds_format_float(self, input_data, input_name=''):
+@@ -102,7 +102,7 @@ except ImportError, exp:
+             for value in values:
+                 try:
+                     fvalue = float(value)
+-                except (TypeError, ValueError), exp:
++                except (TypeError, ValueError) as exp:
+                     raise_parse_error(node, 'Requires sequence of floats')
+             return input_data
+         def gds_format_double(self, input_data, input_name=''):
+@@ -116,7 +116,7 @@ except ImportError, exp:
+             for value in values:
+                 try:
+                     fvalue = float(value)
+-                except (TypeError, ValueError), exp:
++                except (TypeError, ValueError) as exp:
+                     raise_parse_error(node, 'Requires sequence of doubles')
+             return input_data
+         def gds_format_boolean(self, input_data, input_name=''):
+@@ -918,14 +918,14 @@ class personType(GeneratedsSuper):
+             already_processed.append('ratio')
+             try:
+                 self.ratio = float(value)
+-            except ValueError, exp:
++            except ValueError as exp:
+                 raise ValueError('Bad float/double attribute (ratio): %s' % exp)
+         value = find_attr_value_('id', node)
+         if value is not None and 'id' not in already_processed:
+             already_processed.append('id')
+             try:
+                 self.id = int(value)
+-            except ValueError, exp:
++            except ValueError as exp:
+                 raise_parse_error(node, 'Bad integer attribute: %s' % exp)
+         value = find_attr_value_('value', node)
+         if value is not None and 'value' not in already_processed:
+@@ -948,7 +948,7 @@ class personType(GeneratedsSuper):
+             sval_ = child_.text
+             try:
+                 ival_ = int(sval_)
+-            except (TypeError, ValueError), exp:
++            except (TypeError, ValueError) as exp:
+                 raise_parse_error(child_, 'requires integer: %s' % exp)
+             ival_ = self.gds_validate_integer(ival_, node, 'category')
+             self.category = ival_
+@@ -969,7 +969,7 @@ class personType(GeneratedsSuper):
+             sval_ = child_.text
+             try:
+                 ival_ = int(sval_)
+-            except (TypeError, ValueError), exp:
++            except (TypeError, ValueError) as exp:
+                 raise_parse_error(child_, 'requires integer: %s' % exp)
+             ival_ = self.gds_validate_integer(ival_, node, 'range')
+             self.range_ = ival_
+@@ -1278,7 +1278,7 @@ class programmerType(personType):
+             already_processed.append('attrnegint')
+             try:
+                 self.attrnegint = int(value)
+-            except ValueError, exp:
++            except ValueError as exp:
+                 raise_parse_error(node, 'Bad integer attribute: %s' % exp)
+             if self.attrnegint >= 0:
+                 raise_parse_error(node, 'Invalid NegativeInteger')
+@@ -1287,7 +1287,7 @@ class programmerType(personType):
+             already_processed.append('attrposint')
+             try:
+                 self.attrposint = int(value)
+-            except ValueError, exp:
++            except ValueError as exp:
+                 raise_parse_error(node, 'Bad integer attribute: %s' % exp)
+             if self.attrposint <= 0:
+                 raise_parse_error(node, 'Invalid PositiveInteger')
+@@ -1296,7 +1296,7 @@ class programmerType(personType):
+             already_processed.append('attrnonnegint')
+             try:
+                 self.attrnonnegint = int(value)
+-            except ValueError, exp:
++            except ValueError as exp:
+                 raise_parse_error(node, 'Bad integer attribute: %s' % exp)
+             if self.attrnonnegint < 0:
+                 raise_parse_error(node, 'Invalid NonNegativeInteger')
+@@ -1305,7 +1305,7 @@ class programmerType(personType):
+             already_processed.append('attrnonposint')
+             try:
+                 self.attrnonposint = int(value)
+-            except ValueError, exp:
++            except ValueError as exp:
+                 raise_parse_error(node, 'Bad integer attribute: %s' % exp)
+             if self.attrnonposint > 0:
+                 raise_parse_error(node, 'Invalid NonPositiveInteger')
+@@ -1323,7 +1323,7 @@ class programmerType(personType):
+             sval_ = child_.text
+             try:
+                 ival_ = int(sval_)
+-            except (TypeError, ValueError), exp:
++            except (TypeError, ValueError) as exp:
+                 raise_parse_error(child_, 'requires integer: %s' % exp)
+             if ival_ <= 0:
+                 raise_parse_error(child_, 'requires positiveInteger')
+@@ -1333,7 +1333,7 @@ class programmerType(personType):
+             sval_ = child_.text
+             try:
+                 ival_ = int(sval_)
+-            except (TypeError, ValueError), exp:
++            except (TypeError, ValueError) as exp:
+                 raise_parse_error(child_, 'requires integer: %s' % exp)
+             if ival_ > 0:
+                 raise_parse_error(child_, 'requires nonPositiveInteger')
+@@ -1343,7 +1343,7 @@ class programmerType(personType):
+             sval_ = child_.text
+             try:
+                 ival_ = int(sval_)
+-            except (TypeError, ValueError), exp:
++            except (TypeError, ValueError) as exp:
+                 raise_parse_error(child_, 'requires integer: %s' % exp)
+             if ival_ >= 0:
+                 raise_parse_error(child_, 'requires negativeInteger')
+@@ -1353,7 +1353,7 @@ class programmerType(personType):
+             sval_ = child_.text
+             try:
+                 ival_ = int(sval_)
+-            except (TypeError, ValueError), exp:
++            except (TypeError, ValueError) as exp:
+                 raise_parse_error(child_, 'requires integer: %s' % exp)
+             if ival_ < 0:
+                 raise_parse_error(child_, 'requires nonNegativeInteger')
+@@ -1372,7 +1372,7 @@ class programmerType(personType):
+             sval_ = child_.text
+             try:
+                 ival_ = int(sval_)
+-            except (TypeError, ValueError), exp:
++            except (TypeError, ValueError) as exp:
+                 raise_parse_error(child_, 'requires integer: %s' % exp)
+             ival_ = self.gds_validate_integer(ival_, node, 'elshort')
+             self.elshort = ival_
+@@ -1380,7 +1380,7 @@ class programmerType(personType):
+             sval_ = child_.text
+             try:
+                 ival_ = int(sval_)
+-            except (TypeError, ValueError), exp:
++            except (TypeError, ValueError) as exp:
+                 raise_parse_error(child_, 'requires integer: %s' % exp)
+             ival_ = self.gds_validate_integer(ival_, node, 'ellong')
+             self.ellong = ival_
+@@ -1526,7 +1526,7 @@ class paramType(GeneratedsSuper):
+             already_processed.append('flow')
+             try:
+                 self.flow = int(value)
+-            except ValueError, exp:
++            except ValueError as exp:
+                 raise_parse_error(node, 'Bad integer attribute: %s' % exp)
+             self.validate_FlowType(self.flow)    # validate type FlowType
+         value = find_attr_value_('sid', node)
+@@ -1642,7 +1642,7 @@ class python_programmerType(programmerType):
+             sval_ = child_.text
+             try:
+                 ival_ = int(sval_)
+-            except (TypeError, ValueError), exp:
++            except (TypeError, ValueError) as exp:
+                 raise_parse_error(child_, 'requires integer: %s' % exp)
+             ival_ = self.gds_validate_integer(ival_, node, 'flowvalue')
+             self.flowvalue = ival_
+@@ -1882,7 +1882,7 @@ class agentType(GeneratedsSuper):
+             sval_ = child_.text
+             try:
+                 fval_ = float(sval_)
+-            except (TypeError, ValueError), exp:
++            except (TypeError, ValueError) as exp:
+                 raise_parse_error(child_, 'requires float or double: %s' % exp)
+             fval_ = self.gds_validate_float(fval_, node, 'priority')
+             self.priority = fval_
+@@ -2005,7 +2005,7 @@ class special_agentType(agentType):
+             sval_ = child_.text
+             try:
+                 fval_ = float(sval_)
+-            except (TypeError, ValueError), exp:
++            except (TypeError, ValueError) as exp:
+                 raise_parse_error(child_, 'requires float or double: %s' % exp)
+             fval_ = self.gds_validate_float(fval_, node, 'priority')
+             self.priority = fval_
+@@ -2124,7 +2124,7 @@ class weird_agentType(agentType):
+             sval_ = child_.text
+             try:
+                 fval_ = float(sval_)
+-            except (TypeError, ValueError), exp:
++            except (TypeError, ValueError) as exp:
+                 raise_parse_error(child_, 'requires float or double: %s' % exp)
+             fval_ = self.gds_validate_float(fval_, node, 'priority')
+             self.priority = fval_
+@@ -2311,7 +2311,7 @@ class boosterType(GeneratedsSuper):
+             sval_ = child_.text
+             try:
+                 fval_ = float(sval_)
+-            except (TypeError, ValueError), exp:
++            except (TypeError, ValueError) as exp:
+                 raise_parse_error(child_, 'requires float or double: %s' % exp)
+             fval_ = self.gds_validate_float(fval_, node, 'other_name')
+             self.other_name = fval_
+@@ -2319,7 +2319,7 @@ class boosterType(GeneratedsSuper):
+             sval_ = child_.text
+             try:
+                 fval_ = float(sval_)
+-            except (TypeError, ValueError), exp:
++            except (TypeError, ValueError) as exp:
+                 raise_parse_error(child_, 'requires float or double: %s' % exp)
+             fval_ = self.gds_validate_float(fval_, node, 'class')
+             self.classxx = fval_
+@@ -2327,7 +2327,7 @@ class boosterType(GeneratedsSuper):
+             sval_ = child_.text
+             try:
+                 fval_ = float(sval_)
+-            except (TypeError, ValueError), exp:
++            except (TypeError, ValueError) as exp:
+                 raise_parse_error(child_, 'requires float or double: %s' % exp)
+             fval_ = self.gds_validate_float(fval_, node, 'other_value')
+             self.other_value.append(fval_)
+@@ -2335,7 +2335,7 @@ class boosterType(GeneratedsSuper):
+             sval_ = child_.text
+             try:
+                 fval_ = float(sval_)
+-            except (TypeError, ValueError), exp:
++            except (TypeError, ValueError) as exp:
+                 raise_parse_error(child_, 'requires float or double: %s' % exp)
+             fval_ = self.gds_validate_float(fval_, node, 'type')
+             self.type_.append(fval_)
+@@ -2427,14 +2427,14 @@ class infoType(GeneratedsSuper):
+             already_processed.append('rating')
+             try:
+                 self.rating = float(value)
+-            except ValueError, exp:
++            except ValueError as exp:
+                 raise ValueError('Bad float/double attribute (rating): %s' % exp)
+         value = find_attr_value_('type', node)
+         if value is not None and 'type' not in already_processed:
+             already_processed.append('type')
+             try:
+                 self.type_ = int(value)
+-            except ValueError, exp:
++            except ValueError as exp:
+                 raise_parse_error(node, 'Bad integer attribute: %s' % exp)
+         value = find_attr_value_('name', node)
+         if value is not None and 'name' not in already_processed:
+@@ -2516,7 +2516,7 @@ class vehicleType(GeneratedsSuper):
+             sval_ = child_.text
+             try:
+                 ival_ = int(sval_)
+-            except (TypeError, ValueError), exp:
++            except (TypeError, ValueError) as exp:
+                 raise_parse_error(child_, 'requires integer: %s' % exp)
+             ival_ = self.gds_validate_integer(ival_, node, 'wheelcount')
+             self.wheelcount = ival_
+@@ -2736,7 +2736,7 @@ class client_handlerType(GeneratedsSuper):
+             sval_ = child_.text
+             try:
+                 ival_ = int(sval_)
+-            except (TypeError, ValueError), exp:
++            except (TypeError, ValueError) as exp:
+                 raise_parse_error(child_, 'requires integer: %s' % exp)
+             ival_ = self.gds_validate_integer(ival_, node, 'refid')
+             self.refid = ival_
+@@ -2748,7 +2748,7 @@ Usage: python <Parser>.py [ -s ] <in_xml_file>
+ """
+ 
+ def usage():
+-    print USAGE_TEXT
++    print(USAGE_TEXT)
+     sys.exit(1)
+ 
+ 
+diff --git a/tutorial/Code/people_appl1.py b/tutorial/Code/people_appl1.py
+index 948b795..f65ffd1 100644
+--- a/tutorial/Code/people_appl1.py
++++ b/tutorial/Code/people_appl1.py
+@@ -258,7 +258,7 @@ Usage: python ???.py <infilename>
+ """
+ 
+ def usage():
+-    print USAGE_TEXT
++    print(USAGE_TEXT)
+     sys.exit(1)
+ 
+ 
+diff --git a/tutorial/Code/upcase_names.py b/tutorial/Code/upcase_names.py
+index 0b78e65..a0e422d 100644
+--- a/tutorial/Code/upcase_names.py
++++ b/tutorial/Code/upcase_names.py
+@@ -15,11 +15,11 @@ def create_people(names):
+ def main():
+     names = ['albert', 'betsy', 'charlie']
+     people = create_people(names)
+-    print 'Before:'
++    print('Before:')
+     people.export(sys.stdout, 1)
+     people.upcase_names()
+-    print '-' * 50
+-    print 'After:'
++    print('-' * 50)
++    print('After:')
+     people.export(sys.stdout, 1)
+ 
+ 
+diff --git a/tutorial/Code/upcase_names_appl.py b/tutorial/Code/upcase_names_appl.py
+index 3892154..08e9d8d 100644
+--- a/tutorial/Code/upcase_names_appl.py
++++ b/tutorial/Code/upcase_names_appl.py
+@@ -263,7 +263,7 @@ Usage: python ???.py <infilename>
+ """
+ 
+ def usage():
+-    print USAGE_TEXT
++    print(USAGE_TEXT)
+     sys.exit(1)
+ 
+ 
+diff --git a/utils/collect_children.py b/utils/collect_children.py
+index f0806b7..b796968 100755
+--- a/utils/collect_children.py
++++ b/utils/collect_children.py
+@@ -42,7 +42,7 @@ def collect_children(instance, allclassnames):
+ 
+ def walk_tree(node, allclassnames, level=0):
+     indent = '    ' * level
+-    print('{}class: {}'.format(indent, node.__class__.__name__))
++    print(('{}class: {}'.format(indent, node.__class__.__name__)))
+     children = collect_children(node, allclassnames)
+     level += 1
+     for child in children:
+@@ -60,8 +60,8 @@ def test():
+         field3A=[plant2, plant3],
+     )
+     children = collect_children(container1, gdslib.__all__)
+-    print('children: {}'.format(children))
+-    print('-' * 50)
++    print(('children: {}'.format(children)))
++    print(('-' * 50))
+     walk_tree(container1, gdslib.__all__)
+ 
+ 
