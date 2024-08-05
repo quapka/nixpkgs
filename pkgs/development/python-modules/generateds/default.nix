@@ -42,8 +42,8 @@ buildPythonPackage rec {
   ];
 
   patches = [
-    ./fix-print-with-2to3.patch
-    ./skip-online-tests.patch
+    ./port-parts-with-2to3.patch
+    ./mark-online-tests.patch
   ];
 
   doCheck = true;
