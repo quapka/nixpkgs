@@ -1,0 +1,53 @@
+diff --git a/tests/generateDS_test.py b/tests/generateDS_test.py
+index 9198d8e..9a5cd89 100755
+--- a/tests/generateDS_test.py
++++ b/tests/generateDS_test.py
+@@ -9,6 +9,8 @@ import unittest
+ 
+ from lxml import etree
+ 
++import pytest
++
+ 
+ TEST_DIR = os.path.dirname(__file__)
+ 
+@@ -359,6 +361,7 @@ class GenTest(unittest.TestCase):
+         self.remove('{}2_sup.py'.format(t_))
+         self.remove('{}2_sub.py'.format(t_))
+ 
++    @pytest.mark.online
+     def test_013_people_procincl(self):
+         cmdTempl = (
+             'python3 generateDS.py --no-dates --no-versions '
+@@ -567,6 +570,7 @@ class GenTest(unittest.TestCase):
+         self.remove('{}2_sup.py'.format(t_))
+         self.remove('{}2_sub.py'.format(t_))
+ 
++    @pytest.mark.online
+     def test_022_one_per(self):
+         cmdTempl = (
+             'python3 generateDS.py --no-dates --no-versions '
+@@ -1129,6 +1133,7 @@ class GenTest(unittest.TestCase):
+         #self.remove('{}2_sub.py'.format(t_))
+         #self.remove('{}2_out.xml'.format(t_))
+ 
++    @pytest.mark.online
+     def test_043_attr_prefix(self):
+         "Tests for xlink: and xml: prefixes on attribute names."
+         cmdTempl = (
+@@ -1237,6 +1242,7 @@ class GenTest(unittest.TestCase):
+         self.remove('{}2_out.xml'.format(t_))
+         self.remove('{}2_warnings.txt'.format(t_))
+ 
++    @pytest.mark.online
+     def test_047_doc_strings(self):
+         cmdTempl = (
+             'python3 generateDS.py --no-dates --no-versions '
+@@ -1277,6 +1283,7 @@ class GenTest(unittest.TestCase):
+         self.remove('{}2_sup.py'.format(t_))
+         self.remove('{}2_sub.py'.format(t_))
+ 
++    @pytest.mark.online
+     def test_049_episodic_compilation(self):
+         cmdTempl = (
+             'python3 generateDS.py --no-dates --no-versions '

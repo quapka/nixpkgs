@@ -18,6 +18,12 @@ buildPythonPackage rec {
     hash = "sha256-sM5VBDBxSx1DuajGjc/OCu+kZWvC4ch1YT4Jh7plJQs=";
   };
 
+  pytestIni = ./pytest.ini;
+
+  postUnpack = ''
+    cp ${pytestIni} $sourceRoot/pytest.ini
+  '';
+
   nativeBuildInputs = [
     lxml
   ];
@@ -31,16 +37,16 @@ buildPythonPackage rec {
     pytestCheckHook
   ];
 
-  patches = [
-    ./fix-print-with-2to3.patch
+  disabledTests = [
+    "online"
   ];
 
-  # # NOTE: While there
-  # patchPhase = ''
-  #   2to3 --no-diffs --nobackups --write **/*.py || true
-  # '';
+  patches = [
+    ./fix-print-with-2to3.patch
+    ./skip-online-tests.patch
+  ];
 
-  doCheck = false;
+  doCheck = true;
 
   postInstall = ''
     mkdir --parents $bin $lib
@@ -49,19 +55,11 @@ buildPythonPackage rec {
 
   outputs = [ "out" "bin" ];
 
-  # checkPhase = ''
-  #   python -m pytest tests/
-  # '';
-
-  # passthru.tests = {
-  #   version = testers.testVersion { package = tox; };
-  # };
-
   meta = with lib; {
-    # description = "Generic virtualenv management and test command line tool";
-    # mainProgram = "tox";
-    # homepage = "https://github.com/tox-dev/tox";
-    # license = licenses.mit;
+    description = "Generates Python data structures from an Xschema document";
+    mainProgram = "generateDS";
+    homepage = "https://sourceforge.net/projects/generateds/";
+    license = licenses.mit;
     maintainers = [ ];
   };
 }
