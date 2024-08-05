@@ -2,7 +2,6 @@
   lib,
   buildPythonPackage,
   fetchurl,
-  python,
   requests,
   lxml,
   six,
