@@ -7142,6 +7142,8 @@ self: super: with self; {
 
   libevdev = callPackage ../development/python-modules/libevdev { };
 
+  libecc = callPackage ../development/python-modules/libecc { };
+
   libfdt = toPythonModule (pkgs.dtc.override {
     inherit python;
     pythonSupport = true;
