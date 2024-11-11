@@ -3,14 +3,12 @@
   buildPythonPackage,
   fetchFromGitHub,
   setuptools,
-  wheel,
   alabaster,
   attrs,
   babel,
   certifi,
   cffi,
   chardet,
-  codecov,
   colorama,
   coverage,
   docutils,
@@ -83,7 +81,6 @@ buildPythonPackage rec {
     certifi
     cffi
     chardet
-    codecov
     colorama
     coverage
     docutils

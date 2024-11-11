@@ -5,7 +5,6 @@
   fastprogress,
   fastcore,
   fastdownload,
-  torch,
   torchvision,
   matplotlib,
   pillow,
@@ -19,14 +18,14 @@
 
 buildPythonPackage rec {
   pname = "fastai";
-  version = "2.7.15";
+  version = "2.7.17";
   format = "setuptools";
 
   disabled = pythonOlder "3.7";
 
   src = fetchPypi {
     inherit pname version;
-    hash = "sha256-8swg/RjN9exzjMVtKdVN51iH1IrRX501z1DDjTqFaSM=";
+    hash = "sha256-g1UwIkdXO5X9jx5zgjbTYBkA0CEDgCKY9rhz8qXU2Io=";
   };
 
   propagatedBuildInputs = [

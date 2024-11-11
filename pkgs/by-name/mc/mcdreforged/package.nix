@@ -8,14 +8,14 @@
 
 python3.pkgs.buildPythonApplication rec {
   pname = "mcdreforged";
-  version = "2.13.0";
+  version = "2.13.2";
   pyproject = true;
 
   src = fetchFromGitHub {
     owner = "MCDReforged";
     repo = "MCDReforged";
     rev = "refs/tags/v${version}";
-    hash = "sha256-843vsazBXnvVs6DqY6HPUaBn33DktknT8+yH09n+aSI=";
+    hash = "sha256-4podJ3InBnNc+t4BpCQrg2QbJ9ZJr5fmroXyzo7JrZw=";
   };
 
   build-system = [ python3.pkgs.setuptools ];

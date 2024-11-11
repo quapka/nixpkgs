@@ -1,6 +1,5 @@
 { autoPatchelfHook
 , cairo
-, config
 , e2fsprogs
 , fetchurl
 , gmp
@@ -32,7 +31,7 @@ stdenv.mkDerivation {
     e2fsprogs
     gmp
     gtk3
-    stdenv.cc.cc.lib
+    (lib.getLib stdenv.cc.cc)
     libGL
     libX11
     libgcrypt

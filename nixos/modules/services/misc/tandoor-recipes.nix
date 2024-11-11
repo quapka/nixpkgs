@@ -11,7 +11,6 @@ let
     DEBUG = "0";
     DEBUG_TOOLBAR = "0";
     MEDIA_ROOT = "/var/lib/tandoor-recipes";
-    GUNICORN_MEDIA = true;
   } // optionalAttrs (config.time.timeZone != null) {
     TZ = config.time.timeZone;
   } // (
@@ -120,9 +119,6 @@ in
         # gunicorn needs setuid
         SystemCallFilter = [ "@system-service" "~@privileged" "@resources" "@setuid" "@keyring" ];
         UMask = "0066";
-      } // lib.optionalAttrs (cfg.port < 1024) {
-        AmbientCapabilities = [ "CAP_NET_BIND_SERVICE" ];
-        CapabilityBoundingSet = [ "CAP_NET_BIND_SERVICE" ];
       };
 
       wantedBy = [ "multi-user.target" ];

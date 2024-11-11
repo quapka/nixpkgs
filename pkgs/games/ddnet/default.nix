@@ -36,19 +36,19 @@
 
 stdenv.mkDerivation rec {
   pname = "ddnet";
-  version = "18.3.1";
+  version = "18.6";
 
   src = fetchFromGitHub {
     owner = "ddnet";
     repo = pname;
     rev = version;
-    hash = "sha256-OHhybYXmy+kBXtGA19agK7v9TCK2nvFC+goahogCvbU=";
+    hash = "sha256-thAB7QtR23j39ORK1YT2Idp4J7GffbNV7snbLAnYzMI=";
   };
 
   cargoDeps = rustPlatform.fetchCargoTarball {
     name = "${pname}-${version}";
     inherit src;
-    hash = "sha256-a0KRSrozP4mdsl5NOUfCd9nm+pxzXpXZv+K5vSrdZ7E=";
+    hash = "sha256-/kCsAZP9cwUQFcNnk5/eYMzw80Bh4JnwPXd299p1JEU=";
   };
 
   nativeBuildInputs = [
@@ -83,21 +83,14 @@ stdenv.mkDerivation rec {
     vulkan-headers
     glslang
     spirv-tools
-  ] ++ lib.optionals stdenv.isLinux [
+  ] ++ lib.optionals stdenv.hostPlatform.isLinux [
     libX11
-  ] ++ lib.optionals stdenv.isDarwin [
+  ] ++ lib.optionals stdenv.hostPlatform.isDarwin [
     Carbon
     Cocoa
     OpenGL
     Security
   ]);
-
-  patches = [
-    (fetchpatch {
-      url = "https://github.com/ddnet/ddnet/pull/8517/commits/c840bf45016a30e629f7684df5fab5d07b2c70d5.patch";
-      hash = "sha256-UG7pi0Xh/nAHFEF1RIyNZLewF+NFilTLARbV5oUlftc=";
-    })
-  ];
 
   postPatch = ''
     substituteInPlace src/engine/shared/storage.cpp \
@@ -110,7 +103,7 @@ stdenv.mkDerivation rec {
   ];
 
   # Tests loop forever on Darwin for some reason
-  doCheck = !stdenv.isDarwin;
+  doCheck = !stdenv.hostPlatform.isDarwin;
   checkTarget = "run_tests";
 
   postInstall = lib.optionalString (!buildClient) ''
@@ -120,6 +113,11 @@ stdenv.mkDerivation rec {
     rm -rf $out/share/applications
     rm -rf $out/share/icons
     rm -rf $out/share/metainfo
+  '';
+
+  preFixup = lib.optionalString stdenv.hostPlatform.isDarwin ''
+    # Upstream links against <prefix>/lib while it installs this library in <prefix>/lib/ddnet
+    install_name_tool -change "$out/lib/libsteam_api.dylib" "$out/lib/ddnet/libsteam_api.dylib" "$out/bin/DDNet"
   '';
 
   meta = with lib; {

@@ -5,7 +5,7 @@
   python3,
 }:
 let
-  python = python3.override { packageOverrides = self: super: { pydantic = super.pydantic_1; }; };
+  python = python3.override { self = python; packageOverrides = self: super: { pydantic = super.pydantic_1; }; };
 in
 python.pkgs.buildPythonApplication rec {
   pname = "dbx";
@@ -50,10 +50,9 @@ python.pkgs.buildPythonApplication rec {
       tenacity
       typer
       watchdog
-    ]
-    ++ typer.optional-dependencies.all;
+    ];
 
-  passthru.optional-dependencies = with python3.pkgs; {
+  optional-dependencies = with python3.pkgs; {
     aws = [ boto3 ];
     azure = [
       azure-storage-blob

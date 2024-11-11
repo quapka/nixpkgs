@@ -15,19 +15,20 @@
 
 buildPythonPackage rec {
   pname = "google-cloud-shell";
-  version = "1.9.4";
+  version = "1.10.0";
   pyproject = true;
 
   disabled = pythonOlder "3.7";
 
   src = fetchPypi {
-    inherit pname version;
-    hash = "sha256-zYQwPv+r4amD5B8fSm3UMmSH0TAr+LWmBdheA5GmJBE=";
+    pname = "google_cloud_shell";
+    inherit version;
+    hash = "sha256-xhwDKKtksCVXrLEiefPg6aYgWZlNZ2QYFs1AmBIJNjw=";
   };
 
-  nativeBuildInputs = [ setuptools ];
+  build-system = [ setuptools ];
 
-  propagatedBuildInputs = [
+  dependencies = [
     google-api-core
     google-auth
     proto-plus

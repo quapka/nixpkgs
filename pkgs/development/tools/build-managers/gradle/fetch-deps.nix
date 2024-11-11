@@ -22,7 +22,7 @@ in
 , data
 # redirect stdout to stderr to allow the update script to be used with update script combinators
 , silent ? true
-, useBwrap ? stdenv.isLinux
+, useBwrap ? stdenv.hostPlatform.isLinux
 } @ attrs:
 
 let
@@ -123,10 +123,9 @@ let
 
             fileList = builtins.filter (x: lib.hasPrefix xmlBase x && x != url) (builtins.attrNames finalData);
             jarPomList = map parseArtifactUrl fileList;
-            sortedJarPomList =
-              lib.sort
-                (a: b: lib.splitVersion a.version < lib.splitVersion b.version)
-                jarPomList;
+
+            sortByVersion = a: b: (builtins.compareVersions a.version b.version) < 0;
+            sortedJarPomList = lib.sort sortByVersion jarPomList;
 
             uniqueVersionFiles =
               builtins.map ({ i, x }: x)

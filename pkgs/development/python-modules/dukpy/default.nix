@@ -6,7 +6,6 @@
   mutf8,
   webassets,
   pytestCheckHook,
-  pytest-cov,
   mock,
 }:
 
@@ -21,6 +20,12 @@ buildPythonPackage rec {
     rev = "refs/tags/${version}";
     hash = "sha256-8RDMz9SfBoUe7LQ9/atsZlJ/2uwLUb0hZxeYdsUOGpU=";
   };
+
+  postPatch = ''
+    substituteInPlace tests/test_webassets_filter.py \
+      --replace-fail "class PyTestTemp" "class _Temp" \
+      --replace-fail "PyTestTemp" "Temp"
+  '';
 
   build-system = [ setuptools ];
 

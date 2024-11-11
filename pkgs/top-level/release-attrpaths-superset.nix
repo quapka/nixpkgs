@@ -76,12 +76,6 @@ let
     scope = true;
     pkgs = true;
     test-pkgs = true;
-
-    buildHaskellPackages = true;
-    buildPackages = true;
-    buildFreebsd = true;
-    generateOptparseApplicativeCompletions = true;
-
     callPackage = true;
     mkDerivation = true;
     overrideDerivation = true;

@@ -13,16 +13,17 @@
 
 stdenv.mkDerivation rec {
   pname = "iwd";
-  version = "2.17";
+  version = "2.22";
 
   src = fetchgit {
     url = "https://git.kernel.org/pub/scm/network/wireless/iwd.git";
     rev = version;
-    hash = "sha256-o/Q8vUtB4Yiz1x+/6+8LUKUQNtiAmwcdh++/tTUN4mM=";
+    hash = "sha256-t2mfBRP/PRlcfeezu3B7myCKXVv9SHeW8HlGK1cO3/I=";
   };
 
   outputs = [ "out" "man" "doc" ]
     ++ lib.optional (stdenv.hostPlatform == stdenv.buildPlatform) "test";
+  separateDebugInfo = true;
 
   nativeBuildInputs = [
     autoreconfHook

@@ -2,7 +2,6 @@
 , stdenv
 , python3
 , fetchFromGitHub
-, makeWrapper
 , pkgs
 }:
 
@@ -30,7 +29,7 @@ python3.pkgs.buildPythonApplication rec {
     numpy
     onnx
     onnxruntime # Nixpkgs onnxruntime is missing CUDA support
-    opencv4
+    opencv-python
     scikit-image
     tqdm
   ];
@@ -39,11 +38,6 @@ python3.pkgs.buildPythonApplication rec {
   makeWrapperArgs = [
     ''--prefix LD_LIBRARY_PATH : "${lib.makeLibraryPath [ pkgs.onnxruntime ]}"''
   ];
-
-  postPatch = ''
-    substituteInPlace pyproject.toml \
-      --replace-fail "opencv-python" "opencv"
-  '';
 
   pythonImportsCheck = [ "deface" "onnx" "onnxruntime" ];
 

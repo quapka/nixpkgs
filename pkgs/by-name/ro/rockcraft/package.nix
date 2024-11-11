@@ -4,18 +4,17 @@
   fetchFromGitHub,
   dpkg,
   nix-update-script,
-  python3,
 }:
 
 python3Packages.buildPythonApplication rec {
   pname = "rockcraft";
-  version = "1.2.3";
+  version = "1.6.0";
 
   src = fetchFromGitHub {
     owner = "canonical";
     repo = "rockcraft";
-    rev = "refs/tags/${version}";
-    hash = "sha256-Qk7Fi4I/5TCf9llGTsTBQsAxUkeVmAlH6tFNYMsyZ1c=";
+    rev = "1d87e33cf207b3a2f16eb125743ec11546fa0cb1";
+    hash = "sha256-QnW3BMu4Tuvj8PCt5eYJbNMiojXpyJ1uza6hpMxxSOE=";
   };
 
   postPatch = ''
@@ -26,20 +25,23 @@ python3Packages.buildPythonApplication rec {
       --replace-fail "distutils.util" "setuptools.dist"
   '';
 
-  propagatedBuildInputs = with python3Packages; [
-    craft-application-1
+  build-system = with python3Packages; [ setuptools-scm ];
+
+  dependencies = with python3Packages; [
+    craft-application
     craft-archives
+    craft-platforms
     spdx-lookup
   ];
 
   nativeCheckInputs =
     with python3Packages;
     [
+      craft-platforms
       pytest-check
       pytest-mock
       pytest-subprocess
       pytestCheckHook
-      setuptools
     ]
     ++ [ dpkg ];
 

@@ -1,39 +1,36 @@
-{ lib
-, stdenv
-, fetchFromGitLab
-
-, cmake
-
-, glm
-, libGL
-, openxr-loader
-, python3
-, vulkan-headers
-, vulkan-loader
-, xorg
-
-, unstableGitUpdater
+{
+  cmake,
+  fetchFromGitLab,
+  glm,
+  jsoncpp,
+  lib,
+  libGL,
+  python3,
+  stdenv,
+  unstableGitUpdater,
+  vulkan-headers,
+  vulkan-loader,
+  xorg,
 }:
 
 stdenv.mkDerivation {
   pname = "opencomposite";
-  version = "0-unstable-2024-06-12";
+  version = "0-unstable-2024-10-28";
 
   src = fetchFromGitLab {
     owner = "znixian";
     repo = "OpenOVR";
-    rev = "de1658db7e2535fd36c2e37fa8dd3d756280c86f";
-    hash = "sha256-xyEiuEy3nt2AbF149Pjz5wi/rkTup2SgByR4DrNOJX0=";
+    rev = "e162c7e9be2521a357fba4bee13af85437a1027b";
+    fetchSubmodules = true;
+    hash = "sha256-+suq0gV8zRDhF3ApnzQCC/5st59VniU6v7TcDdght6Q=";
   };
 
-  nativeBuildInputs = [
-    cmake
-  ];
+  nativeBuildInputs = [ cmake ];
 
   buildInputs = [
     glm
+    jsoncpp
     libGL
-    openxr-loader
     python3
     vulkan-headers
     vulkan-loader
@@ -41,18 +38,11 @@ stdenv.mkDerivation {
   ];
 
   cmakeFlags = [
-    (lib.cmakeBool "USE_SYSTEM_OPENXR" true)
+    (lib.cmakeFeature "CMAKE_CXX_FLAGS" "-Wno-error=format-security")
+    # See https://gitlab.com/znixian/OpenOVR/-/issues/416
+    (lib.cmakeBool "USE_SYSTEM_OPENXR" false)
     (lib.cmakeBool "USE_SYSTEM_GLM" true)
   ];
-
-  # NOTE: `cmakeFlags` will get later tokenized by bash and there is no way
-  # of inserting a flag value with a space in it (inserting `"` or `'` won't help).
-  # https://discourse.nixos.org/t/cmakeflags-and-spaces-in-option-values/20170/2
-  preConfigure = ''
-    cmakeFlagsArray+=(
-      "-DCMAKE_CXX_FLAGS=-DGLM_ENABLE_EXPERIMENTAL -Wno-error=format-security"
-    )
-  '';
 
   installPhase = ''
     runHook preInstall
@@ -66,10 +56,10 @@ stdenv.mkDerivation {
     branch = "openxr";
   };
 
-  meta = with lib; {
+  meta = {
     description = "Reimplementation of OpenVR, translating calls to OpenXR";
     homepage = "https://gitlab.com/znixian/OpenOVR";
-    license = with licenses; [ gpl3Only ];
-    maintainers = with maintainers; [ Scrumplex ];
+    license = with lib.licenses; [ gpl3Only ];
+    maintainers = with lib.maintainers; [ Scrumplex ];
   };
 }

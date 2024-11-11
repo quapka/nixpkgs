@@ -13,12 +13,12 @@
 
 buildPythonPackage rec {
   pname = "jenkins-job-builder";
-  version = "6.3.0";
+  version = "6.4.1";
   format = "setuptools";
 
   src = fetchPypi {
     inherit pname version;
-    hash = "sha256-RD9VQFlwLJ3TiReKty+q056CjsOnSD2J2bpASmqHIEM=";
+    hash = "sha256-Re7rNAcm0cpSx1tmSzTjfDlW7y236lzFKFjVw0uUTmw=";
   };
 
   postPatch = ''
@@ -43,6 +43,6 @@ buildPythonPackage rec {
     mainProgram = "jenkins-jobs";
     homepage = "https://jenkins-job-builder.readthedocs.io/en/latest/";
     license = licenses.asl20;
-    maintainers = with maintainers; [ ];
+    maintainers = [ ];
   };
 }

@@ -11,16 +11,16 @@
 
 rustPlatform.buildRustPackage rec {
   pname = "tui-journal";
-  version = "0.9.0";
+  version = "0.12.0";
 
   src = fetchFromGitHub {
     owner = "AmmarAbouZor";
     repo = "tui-journal";
     rev = "v${version}";
-    hash = "sha256-FAN0F54cCEfqoSr1La+X+et5MGTzB2Wb466Xr8eyeiI=";
+    hash = "sha256-A3uSbd3tXrXe3jvlppndyg3L2gi5eiaxIrPTKqD5vog=";
   };
 
-  cargoHash = "sha256-y6gAv4Xf0yxpbOAdYhp3nDBH8skiyAI10+Ylz/uxf7w=";
+  cargoHash = "sha256-b3loo6ZzZs3XwBI4JT9oth57vP3Aaulp24B7YDSnhhQ=";
 
   nativeBuildInputs = [
     pkg-config
@@ -30,7 +30,7 @@ rustPlatform.buildRustPackage rec {
     libgit2
     openssl
     zlib
-  ] ++ lib.optionals stdenv.isDarwin [
+  ] ++ lib.optionals stdenv.hostPlatform.isDarwin [
     darwin.apple_sdk.frameworks.AppKit
     darwin.apple_sdk.frameworks.Security
   ];

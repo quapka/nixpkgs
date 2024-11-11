@@ -30,7 +30,7 @@ stdenv.mkDerivation rec {
     "-DENABLE_TESTS=${if doCheck then "ON" else "OFF"}"
   ];
 
-  doCheck = stdenv.hostPlatform == stdenv.buildPlatform;
+  doCheck = stdenv.buildPlatform.canExecute stdenv.hostPlatform;
   nativeCheckInputs = [ check ];
 
   meta = with lib; {
@@ -38,7 +38,7 @@ stdenv.mkDerivation rec {
     mainProgram = "utox";
     homepage = "https://github.com/uTox/uTox";
     license = licenses.gpl3;
-    maintainers = with maintainers; [ ];
+    maintainers = [ ];
     platforms = platforms.all;
   };
 }

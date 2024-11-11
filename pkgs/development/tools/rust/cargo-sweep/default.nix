@@ -1,4 +1,8 @@
-{ lib, rustPlatform, fetchFromGitHub }:
+{
+  lib,
+  rustPlatform,
+  fetchFromGitHub,
+}:
 
 rustPlatform.buildRustPackage rec {
   pname = "cargo-sweep";
@@ -11,11 +15,13 @@ rustPlatform.buildRustPackage rec {
     sha256 = "sha256-L9tWTgW8PIjxeby+wa71NPp3kWMYH5D7PNtpk8Bmeyc=";
   };
 
-  cargoSha256 = "sha256-aalB7gHLc3YIgSOg68wc2fyzXFGfHO5x5YdzhuRmyro=";
+  cargoHash = "sha256-aalB7gHLc3YIgSOg68wc2fyzXFGfHO5x5YdzhuRmyro=";
 
   checkFlags = [
     # Requires a rustup toolchain to be installed.
     "--skip check_toolchain_listing_on_multiple_projects"
+    # Does not work with a `--target` build in the environment
+    "--skip empty_project_output"
   ];
 
   meta = with lib; {
@@ -23,6 +29,9 @@ rustPlatform.buildRustPackage rec {
     mainProgram = "cargo-sweep";
     homepage = "https://github.com/holmgr/cargo-sweep";
     license = licenses.mit;
-    maintainers = with maintainers; [ xrelkd matthiasbeyer ];
+    maintainers = with maintainers; [
+      xrelkd
+      matthiasbeyer
+    ];
   };
 }

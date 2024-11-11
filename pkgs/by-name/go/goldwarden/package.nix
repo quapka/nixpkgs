@@ -2,7 +2,6 @@
 , blueprint-compiler
 , buildGoModule
 , fetchFromGitHub
-, fetchpatch
 , gobject-introspection
 , gtk4
 , libadwaita
@@ -14,13 +13,13 @@
 
 buildGoModule rec {
   pname = "goldwarden";
-  version = "0.3.3";
+  version = "0.3.4";
 
   src = fetchFromGitHub {
     owner = "quexten";
     repo = "goldwarden";
     rev = "v${version}";
-    hash = "sha256-s00ZgRmp+0UTp4gpoQgZZqSJMRGsGuUxoX2DEryG+XM=";
+    hash = "sha256-LAnhCQmyubWeZtTVaW8IoNmfipvMIlAnY4pKwrURPDs=";
   };
 
   postPatch = ''
@@ -39,7 +38,7 @@ buildGoModule rec {
       --replace-fail "@PATH@" "$out/bin/goldwarden"
   '';
 
-  vendorHash = "sha256-TSmYqLMeS/G1rYNxVfh3uIK9bQJhsd7mos50yIXQoT4=";
+  vendorHash = "sha256-rMs7FP515aClzt9sjgIQHiYo5SYa2tDHrVRhtT+I8aM=";
 
   ldflags = [ "-s" "-w" ];
 
@@ -93,7 +92,7 @@ buildGoModule rec {
     description = "Feature-packed Bitwarden compatible desktop integration";
     homepage = "https://github.com/quexten/goldwarden";
     license = licenses.mit;
-    maintainers = with maintainers; [ arthsmn ];
+    maintainers = with maintainers; [ arthsmn justanotherariel ];
     mainProgram = "goldwarden";
     platforms = platforms.linux; # Support for other platforms is not yet ready, see https://github.com/quexten/goldwarden/issues/4
   };

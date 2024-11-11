@@ -19,20 +19,20 @@ let
   ein = "${stdenv.hostPlatform.emulator buildPackages} $out/bin/ein";
 in rustPlatform.buildRustPackage rec {
   pname = "gitoxide";
-  version = "0.36.0";
+  version = "0.38.0";
 
   src = fetchFromGitHub {
     owner = "Byron";
     repo = "gitoxide";
     rev = "v${version}";
-    hash = "sha256-HXuMcLY5BAC2dODlI6sgwCyGEBDW6ojlHRCBnIQ6P6A=";
+    hash = "sha256-JqWFdZXcmL97w5CochG9kXXH7cN2KMarkNUvfQXbYU0=";
   };
 
-  cargoHash = "sha256-v+HVrYMPwbD0RDyxufv11KOnWGbTljpbx6ZlSJ46Olk=";
+  cargoHash = "sha256-EGPx4NNvgGe+LJ8Gn0ne8O4lCA+9p+E9J7OOhLQDWX0=";
 
   nativeBuildInputs = [ cmake pkg-config installShellFiles ];
 
-  buildInputs = [ curl ] ++ (if stdenv.isDarwin
+  buildInputs = [ curl ] ++ (if stdenv.hostPlatform.isDarwin
     then [ libiconv Security SystemConfiguration ]
     else [ openssl ]);
 

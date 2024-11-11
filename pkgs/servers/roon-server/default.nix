@@ -15,7 +15,7 @@
 , stdenv
 }:
 let
-  version = "2.0-1432";
+  version = "2.0-1470";
   urlVersion = builtins.replaceStrings [ "." "-" ] [ "00" "0" ] version;
 in
 stdenv.mkDerivation {
@@ -24,7 +24,7 @@ stdenv.mkDerivation {
 
   src = fetchurl {
     url = "https://download.roonlabs.com/updates/production/RoonServer_linuxx64_${urlVersion}.tar.bz2";
-    hash = "sha256-h0Ly5S8ML29RtaZOpe0k4U/R0coClHHGUZyu5d1PqzQ=";
+    hash = "sha256-esaxrSdvl1qUNfotOSs8Tj/AUg6hFpl23DGbji/uFO8=";
   };
 
   dontConfigure = true;
@@ -36,7 +36,7 @@ stdenv.mkDerivation {
     krb5
     libtasn1
     lttng-ust_2_12
-    stdenv.cc.cc.lib
+    (lib.getLib stdenv.cc.cc)
   ];
 
   nativeBuildInputs = [ autoPatchelfHook makeWrapper ];

@@ -26,8 +26,6 @@ stdenv.mkDerivation rec {
     ninja
   ];
 
-  buildInputs = [ ];
-
   mesonFlags = [
     # install validators to $dev
     "--bindir=${placeholder "dev"}/bin"
@@ -41,7 +39,7 @@ stdenv.mkDerivation rec {
     "-Dtests=disabled"
     # Avoid heavyweight python dependencies.
     "-Ddocs=disabled"
-  ] ++ lib.optionals stdenv.isDarwin [
+  ] ++ lib.optionals stdenv.hostPlatform.isDarwin [
     "-Dlv2dir=${placeholder "out"}/lib/lv2"
   ];
 
@@ -61,7 +59,7 @@ stdenv.mkDerivation rec {
     description = "Plugin standard for audio systems";
     mainProgram = "lv2_validate";
     license = licenses.mit;
-    maintainers = with maintainers; [ goibhniu ];
+    maintainers = [ ];
     platforms = platforms.unix;
   };
 }

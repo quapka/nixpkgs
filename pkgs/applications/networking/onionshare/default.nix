@@ -2,6 +2,7 @@
 , stdenv
 , fetchFromGitHub
 , fetchpatch
+, meek
 , obfs4
 , python3
 , qt5
@@ -44,9 +45,6 @@ let
     license = licenses.gpl3Plus;
     maintainers = with maintainers; [ bbjubjub ];
   };
-
-  # TODO: package meek https://support.torproject.org/glossary/meek/
-  meek = "/meek-not-available";
 in
 rec {
   onionshare = python3.pkgs.buildPythonApplication {
@@ -84,6 +82,7 @@ rec {
       pysocks
       qrcode
       requests
+      setuptools
       stem
       unidecode
       waitress
@@ -104,9 +103,9 @@ rec {
       export HOME="$(mktemp -d)"
     '';
 
-    disabledTests = lib.optionals stdenv.isLinux [
+    disabledTests = lib.optionals stdenv.hostPlatform.isLinux [
       "test_get_tor_paths_linux"  # expects /usr instead of /nix/store
-    ] ++ lib.optionals stdenv.isDarwin [
+    ] ++ lib.optionals stdenv.hostPlatform.isDarwin [
       # requires meek-client which is not packaged
       "test_get_tor_paths_darwin"
       # on darwin (and only on darwin) onionshare attempts to discover

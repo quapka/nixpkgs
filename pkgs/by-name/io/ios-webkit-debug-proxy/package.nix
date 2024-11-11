@@ -2,7 +2,6 @@
   lib,
   stdenv,
   fetchFromGitHub,
-  fetchpatch,
 
   autoconf,
   automake,
@@ -14,7 +13,6 @@
   libusb1,
   openssl,
 
-  ios-webkit-debug-proxy,
   nix-update-script,
   testers,
 }:
@@ -62,7 +60,7 @@ stdenv.mkDerivation (finalAttrs: {
 
   passthru = {
     updateScript = nix-update-script { };
-    tests.version = testers.testVersion { package = ios-webkit-debug-proxy; };
+    tests.version = testers.testVersion { package = finalAttrs.finalPackage; };
   };
 
   meta = with lib; {
@@ -73,6 +71,7 @@ stdenv.mkDerivation (finalAttrs: {
       to MobileSafari and UIWebViews on real and simulated iOS devices.
     '';
     homepage = "https://github.com/google/ios-webkit-debug-proxy";
+    changelog = "https://github.com/google/ios-webkit-debug-proxy/releases/tag/${finalAttrs.src.rev}";
     license = licenses.bsd3;
     mainProgram = "ios_webkit_debug_proxy";
     maintainers = with maintainers; [

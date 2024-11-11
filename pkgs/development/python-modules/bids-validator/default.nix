@@ -11,7 +11,7 @@
 
 buildPythonPackage rec {
   pname = "bids-validator";
-  version = "1.14.6";
+  version = "1.14.7.post0";
   pyproject = true;
 
   disabled = pythonOlder "3.7";
@@ -19,7 +19,7 @@ buildPythonPackage rec {
   src = fetchPypi {
     pname = "bids_validator";
     inherit version;
-    hash = "sha256-3ytrXRqq1h00zK0ElPLtc84wgoJa2jGVTE4UwlONSFw=";
+    hash = "sha256-5gBaUAt1+KlhWT+2fUYIUQfa2xFvWaXDtSSqBpeUW2Y=";
   };
 
   nativeBuildInputs = [
@@ -37,6 +37,6 @@ buildPythonPackage rec {
     homepage = "https://github.com/bids-standard/bids-validator";
     changelog = "https://github.com/bids-standard/bids-validator/releases/tag/v${version}";
     license = licenses.mit;
-    maintainers = with maintainers; [ ];
+    maintainers = [ ];
   };
 }

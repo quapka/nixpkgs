@@ -1,4 +1,4 @@
-{ lib, stdenv, fetchurl, rpmextract, patchelf, bash, testers, scaleft }:
+{ lib, stdenv, fetchurl, rpmextract, patchelf, testers, scaleft }:
 
 stdenv.mkDerivation rec {
   pname = "scaleft";
@@ -14,7 +14,7 @@ stdenv.mkDerivation rec {
 
   libPath =
     lib.makeLibraryPath
-       [ stdenv.cc stdenv.cc.cc.lib ];
+       [ stdenv.cc stdenv.cc.cc ];
 
   buildCommand = ''
     mkdir -p $out/bin/

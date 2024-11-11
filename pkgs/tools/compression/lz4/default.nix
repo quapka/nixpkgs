@@ -4,28 +4,24 @@
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "lz4";
-  version = "1.9.4";
+  version = "1.10.0";
 
   src = fetchFromGitHub {
     repo = "lz4";
     owner = "lz4";
     rev = "v${finalAttrs.version}";
-    hash = "sha256-YiMCD3vvrG+oxBUghSrCmP2LAfAGZrEaKz0YoaQJhpI=";
+    hash = "sha256-/dG1n59SKBaEBg72pAWltAtVmJ2cXxlFFhP+klrkTos=";
   };
 
   nativeBuildInputs = [
     cmake
   ];
 
-  buildInputs = lib.optionals finalAttrs.doCheck [
+  buildInputs = lib.optionals finalAttrs.finalPackage.doCheck [
     valgrind
   ];
 
   outputs = [ "dev" "lib" "man" "out" ];
-
-  patches = [
-    ./0001-Create-a-unified-lz4-target.patch
-  ];
 
   cmakeDir = "../build/cmake";
   cmakeBuildDir = "build-dist";
