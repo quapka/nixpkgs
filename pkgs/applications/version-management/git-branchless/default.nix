@@ -2,15 +2,12 @@
   lib,
   fetchFromGitHub,
   git,
-  libiconv,
   ncurses,
   openssl,
   pkg-config,
   rustPlatform,
   sqlite,
   stdenv,
-  Security,
-  SystemConfiguration,
 }:
 
 rustPlatform.buildRustPackage rec {
@@ -24,21 +21,16 @@ rustPlatform.buildRustPackage rec {
     hash = "sha256-8uv+sZRr06K42hmxgjrKk6FDEngUhN/9epixRYKwE3U=";
   };
 
-  cargoHash = "sha256-AEEAHMKGVYcijA+Oget+maDZwsk/RGPhHQfiv+AT4v8=";
+  useFetchCargoVendor = true;
+  cargoHash = "sha256-i7KpTd4fX3PrhDjj3R9u98rdI0uHkpQCxSmEF+Gu7yk=";
 
   nativeBuildInputs = [ pkg-config ];
 
-  buildInputs =
-    [
-      ncurses
-      openssl
-      sqlite
-    ]
-    ++ lib.optionals stdenv.hostPlatform.isDarwin [
-      Security
-      SystemConfiguration
-      libiconv
-    ];
+  buildInputs = [
+    ncurses
+    openssl
+    sqlite
+  ];
 
   postInstall = lib.optionalString (with stdenv; buildPlatform.canExecute hostPlatform) ''
     $out/bin/git-branchless install-man-pages $out/share/man

@@ -12,7 +12,27 @@
 }:
 
 let
-  mkCommon = callPackage ./common.nix { };
+  mkWrapper = callPackage ./wrapper.nix { };
+  mkCommon =
+    type: args:
+    mkWrapper type (
+      stdenvNoCC.mkDerivation (
+        args
+        // {
+          outputs = args.outputs or [ "out" ] ++ [ "man" ];
+          postFixup =
+            args.postFixup or ""
+            + ''
+              ln -s ${vmr.man} $man
+            '';
+          propagatedSandboxProfile = lib.optionalString stdenvNoCC.hostPlatform.isDarwin ''
+            (allow file-read* (subpath "/private/var/db/mds/system"))
+            (allow mach-lookup (global-name "com.apple.SecurityServer")
+                              (global-name "com.apple.system.opendirectoryd.membership"))
+          '';
+        }
+      )
+    );
   inherit (vmr) targetRid releaseManifest;
 
   # TODO: do this properly
@@ -51,8 +71,12 @@ let
           version=''${version,,}
           mkdir -p "$out"/share/nuget/packages/"$id"
           cp -r . "$out"/share/nuget/packages/"$id"/"$version"
-          chmod +w "$out"/share/nuget/packages/"$id"/"$version"
-          echo {} > "$out"/share/nuget/packages/"$id"/"$version"/.nupkg.metadata
+          cd "$out"/share/nuget/packages/"$id"/"$version"
+          chmod +w .
+          for dir in tools runtimes/*/native; do
+            [[ ! -d "$dir" ]] || chmod -R +x "$dir"
+          done
+          echo {} > .nupkg.metadata
         )
 
         popd
@@ -76,7 +100,8 @@ let
       (mkPackage "Microsoft.NETCore.DotNetHost" runtime.version)
       (mkPackage "Microsoft.NETCore.DotNetHostPolicy" runtime.version)
       (mkPackage "Microsoft.NETCore.DotNetHostResolver" runtime.version)
-    ];
+    ]
+    ++ targetPackages.${targetRid};
 
   targetPackages = fallbackTargetPackages // {
     ${targetRid} =
@@ -114,10 +139,11 @@ let
     installPhase = ''
       runHook preInstall
 
-      cp -r "$src"/dotnet-sdk-${version}-${targetRid} "$out"
-      chmod +w "$out"
+      mkdir -p "$out"/share
+      cp -r "$src"/dotnet-sdk-${version}-${targetRid} "$out"/share/dotnet
+      chmod +w "$out"/share/dotnet
       mkdir "$out"/bin
-      ln -s "$out"/dotnet "$out"/bin/dotnet
+      ln -s "$out"/share/dotnet/dotnet "$out"/bin/dotnet
 
       mkdir -p "$artifacts"
       cp -r "$src"/Private.SourceBuilt.Artifacts.*.${targetRid}/* "$artifacts"/
@@ -139,7 +165,12 @@ let
     passthru = {
       inherit (vmr) icu targetRid hasILCompiler;
 
-      inherit packages targetPackages;
+      inherit
+        packages
+        targetPackages
+        runtime
+        aspnetcore
+        ;
     };
 
     meta = vmr.meta // {
@@ -154,15 +185,14 @@ let
     src = vmr;
     dontUnpack = true;
 
-    outputs = [ "out" ];
-
     installPhase = ''
       runHook preInstall
 
-      cp -r "$src/dotnet-runtime-${version}-${targetRid}" "$out"
-      chmod +w "$out"
+      mkdir -p "$out"/share
+      cp -r "$src/dotnet-runtime-${version}-${targetRid}" "$out"/share/dotnet
+      chmod +w "$out"/share/dotnet
       mkdir "$out"/bin
-      ln -s "$out"/dotnet "$out"/bin/dotnet
+      ln -s "$out"/share/dotnet/dotnet "$out"/bin/dotnet
 
       runHook postInstall
     '';
@@ -179,18 +209,17 @@ let
     src = vmr;
     dontUnpack = true;
 
-    outputs = [ "out" ];
-
     installPhase = ''
       runHook preInstall
 
-      cp -r "$src/dotnet-runtime-${releaseManifest.runtimeVersion}-${targetRid}" "$out"
-      chmod +w "$out"
+      mkdir -p "$out"/share
+      cp -r "$src/dotnet-runtime-${runtime.version}-${targetRid}" "$out"/share/dotnet
+      chmod +w "$out"/share/dotnet/shared
       mkdir "$out"/bin
-      ln -s "$out"/dotnet "$out"/bin/dotnet
+      ln -s "$out"/share/dotnet/dotnet "$out"/bin/dotnet
 
-      chmod +w "$out"/shared
-      cp -Tr "$src/aspnetcore-runtime-${version}-${targetRid}" "$out"
+      cp -Tr "$src/aspnetcore-runtime-${version}-${targetRid}" "$out"/share/dotnet
+      chmod +w "$out"/share/dotnet/shared
 
       runHook postInstall
     '';

@@ -37,14 +37,14 @@
 
 buildPythonPackage rec {
   pname = "moto";
-  version = "5.0.16";
+  version = "5.0.26";
   pyproject = true;
 
   disabled = pythonOlder "3.8";
 
   src = fetchPypi {
     inherit pname version;
-    hash = "sha256-9K+xdqlkzXpw2pvF4FPUMQlhTOPKsmBEvLtTYQQ13/Q=";
+    hash = "sha256-aCn1imcKCH58W2P4GDxrctZKFETkIMISJQtzJraakYM=";
   };
 
   build-system = [ setuptools ];
@@ -162,6 +162,7 @@ buildPythonPackage rec {
       pyyaml
       py-partiql-parser
     ];
+    sns = [ ];
     stepfunctions = [
       antlr4-python3-runtime
       jsonpath-ng
@@ -226,7 +227,7 @@ buildPythonPackage rec {
     # AssertionError: assert ResourceWarning not in [<class 'ResourceWarning'>, <class 'ResourceWarning'>]
     "test_delete_object_with_version"
 
-    # KeyError beucase of ap-southeast-5-apse5-az
+    # KeyError because of ap-southeast-5-apse5-az
     "test_zoneId_in_availability_zones"
 
     # Parameter validation fails
@@ -254,11 +255,11 @@ buildPythonPackage rec {
     "tests/test_cognitoidp/test_cognitoidp.py"
   ];
 
-  meta = with lib; {
-    description = "Module to allow your tests to easily mock out AWS Services";
+  meta = {
+    description = "Allows your tests to easily mock out AWS Services";
     homepage = "https://github.com/getmoto/moto";
     changelog = "https://github.com/getmoto/moto/blob/${version}/CHANGELOG.md";
-    license = licenses.asl20;
-    maintainers = [ ];
+    license = lib.licenses.asl20;
+    maintainers = with lib.maintainers; [ onny ];
   };
 }

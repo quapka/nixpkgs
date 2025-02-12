@@ -21,7 +21,8 @@ rustPlatform.buildRustPackage rec {
     fetchSubmodules = true;
   };
 
-  cargoHash = "sha256-w7mB0cAN5aRO1pw21BDIFUtnYUJUoYjW+7nXFCBfYgM=";
+  useFetchCargoVendor = true;
+  cargoHash = "sha256-DEq67oPEo5CZYtX7kaqWNXzgbOiyvN3n+Qs9fiMHgUw=";
 
   nativeBuildInputs = [
     pkg-config
@@ -32,7 +33,7 @@ rustPlatform.buildRustPackage rec {
     [
       dbus
     ]
-    ++ lib.optionals stdenv.isDarwin [
+    ++ lib.optionals stdenv.hostPlatform.isDarwin [
       darwin.apple_sdk.frameworks.CoreFoundation
       darwin.apple_sdk.frameworks.CoreServices
       darwin.apple_sdk.frameworks.Security

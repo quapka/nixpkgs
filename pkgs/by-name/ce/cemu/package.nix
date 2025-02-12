@@ -7,6 +7,7 @@
   cubeb,
   curl,
   fetchFromGitHub,
+  fetchpatch,
   fmt_9,
   gamemode,
   glm,
@@ -50,13 +51,13 @@ let
 in
 stdenv.mkDerivation (finalAttrs: {
   pname = "cemu";
-  version = "2.2";
+  version = "2.4";
 
   src = fetchFromGitHub {
     owner = "cemu-project";
     repo = "Cemu";
     rev = "v${finalAttrs.version}";
-    hash = "sha256-d4FMAj99SPj5S1p5nAUFNo386ZJvWxOKD9iGxHJYVBI=";
+    hash = "sha256-JBd5ntU1fFDvQpNbfP63AQANzuQTdfd4dfB29/BN5LM=";
   };
 
   patches = [
@@ -65,6 +66,11 @@ stdenv.mkDerivation (finalAttrs: {
     # > SPIRV-Tools-opt
     ./0000-spirv-tools-opt-cmakelists.patch
     ./0001-glslang-cmake-target.patch
+    (fetchpatch {
+      name = "fix-building-against-boost-187.patch";
+      url = "https://github.com/cemu-project/Cemu/commit/2b0cbf7f6b6c34c748585d255ee7756ff592a502.patch";
+      hash = "sha256-jHB/9MWZ/oNfUgZtxtgkSN/OnRARSuGVfXFFB9ldDpI=";
+    })
   ];
 
   nativeBuildInputs = [
@@ -173,7 +179,6 @@ stdenv.mkDerivation (finalAttrs: {
     maintainers = with lib.maintainers; [
       zhaofengli
       baduhai
-      AndersonTorres
     ];
     platforms = [ "x86_64-linux" ];
   };

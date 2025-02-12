@@ -28,7 +28,7 @@
 
 buildPythonPackage rec {
   pname = "starlette";
-  version = "0.39.2";
+  version = "0.45.2";
   pyproject = true;
 
   disabled = pythonOlder "3.8";
@@ -36,8 +36,8 @@ buildPythonPackage rec {
   src = fetchFromGitHub {
     owner = "encode";
     repo = "starlette";
-    rev = "refs/tags/${version}";
-    hash = "sha256-sAvtqeyfyMf+xt78bqlaNYW9xYYCFkiW45OVlI9itgg=";
+    tag = version;
+    hash = "sha256-c4PAFrsp/KZMwUyvU6sgIyVKzoKM5zrt3is/SAQX3oM=";
   };
 
   build-system = [ hatchling ];

@@ -20,7 +20,8 @@ let
     NoNewPrivileges = true;
     PrivateUsers = true;
     PrivateTmp = true;
-    PrivateDevices = true;
+    PrivateDevices = cfg.accelerationDevices == [ ];
+    DeviceAllow = mkIf (cfg.accelerationDevices != null) cfg.accelerationDevices;
     PrivateMounts = true;
     ProtectClock = true;
     ProtectControlGroups = true;
@@ -37,6 +38,7 @@ let
     RestrictNamespaces = true;
     RestrictRealtime = true;
     RestrictSUIDSGID = true;
+    UMask = "0077";
   };
   inherit (lib)
     types
@@ -116,7 +118,7 @@ in
       description = ''
         Configuration for Immich.
         See <https://immich.app/docs/install/config-file/> or navigate to
-        <https://your-immich-domain/admin/system-settings> for
+        <https://my.immich.app/admin/system-settings> for
         options and defaults.
         Setting it to `null` allows configuring Immich in the web interface.
       '';
@@ -158,6 +160,17 @@ in
           Extra configuration environment variables. Refer to the [documentation](https://immich.app/docs/install/environment-variables) for options tagged with 'machine-learning'.
         '';
       };
+    };
+
+    accelerationDevices = mkOption {
+      type = types.nullOr (types.listOf types.str);
+      default = [ ];
+      example = [ "/dev/dri/renderD128" ];
+      description = ''
+        A list of device paths to hardware acceleration devices that immich should
+        have access to. This is useful when transcoding media files.
+        The special value `[ ]` will disallow all devices using `PrivateDevices`. `null` will give access to all devices.
+      '';
     };
 
     database = {
@@ -227,7 +240,7 @@ in
           ensureClauses.login = true;
         }
       ];
-      extraPlugins = ps: with ps; [ pgvecto-rs ];
+      extensions = ps: with ps; [ pgvecto-rs ];
       settings = {
         shared_preload_libraries = [ "vectors.so" ];
         search_path = "\"$user\", public, vectors";
@@ -270,7 +283,7 @@ in
       let
         postgresEnv =
           if isPostgresUnixSocket then
-            { DB_URL = "socket://${cfg.database.host}?dbname=${cfg.database.name}"; }
+            { DB_URL = "postgresql:///${cfg.database.name}?host=${cfg.database.host}"; }
           else
             {
               DB_HOSTNAME = cfg.database.host;
@@ -317,6 +330,11 @@ in
       after = [ "network.target" ];
       wantedBy = [ "multi-user.target" ];
       inherit (cfg) environment;
+      path = [
+        # gzip and pg_dumpall are used by the backup service
+        pkgs.gzip
+        config.services.postgresql.package
+      ];
 
       serviceConfig = commonServiceConfig // {
         ExecStart = lib.getExe cfg.package;
@@ -345,6 +363,21 @@ in
         CacheDirectory = "immich";
         User = cfg.user;
         Group = cfg.group;
+      };
+    };
+
+    systemd.tmpfiles.settings = {
+      immich = {
+        # Redundant to the `UMask` service config setting on new installs, but installs made in
+        # early 24.11 created world-readable media storage by default, which is a privacy risk. This
+        # fixes those installs.
+        "${cfg.mediaLocation}" = {
+          e = {
+            user = cfg.user;
+            group = cfg.group;
+            mode = "0700";
+          };
+        };
       };
     };
 

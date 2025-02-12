@@ -42,6 +42,9 @@ stdenv.mkDerivation (finalAttrs: {
     libxslt
     pkg-config
     python3Packages.python
+  ];
+
+  nativeInstallCheckInputs = [
     python3Packages.pythonImportsCheckHook
   ];
 
@@ -51,6 +54,7 @@ stdenv.mkDerivation (finalAttrs: {
     pcre2
   ];
 
+  doInstallCheck = true;
   strictDeps = true;
 
   postInstall = ''
@@ -65,7 +69,7 @@ stdenv.mkDerivation (finalAttrs: {
     description = "Tiny library providing a C 'class' for working with arbitrary big sizes in bytes";
     license = lib.licenses.lgpl2Plus;
     mainProgram = "bscalc";
-    maintainers = with lib.maintainers; [ AndersonTorres ];
+    maintainers = with lib.maintainers; [ ];
     platforms = lib.platforms.linux;
   };
 })

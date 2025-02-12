@@ -1,29 +1,27 @@
-{ stdenv
-, lib
-, rustPlatform
-, fetchFromGitHub
-, llvmPackages
-, libffi
-, libxml2
-, CoreFoundation
-, SystemConfiguration
-, Security
-, withLLVM ? !(stdenv.hostPlatform.isDarwin && stdenv.hostPlatform.isAarch64)
-, withSinglepass ? true
+{
+  lib,
+  rustPlatform,
+  fetchFromGitHub,
+  llvmPackages,
+  libffi,
+  libxml2,
+  withLLVM ? true,
+  withSinglepass ? true,
 }:
 
 rustPlatform.buildRustPackage rec {
   pname = "wasmer";
-  version = "5.0.0";
+  version = "5.0.4";
 
   src = fetchFromGitHub {
     owner = "wasmerio";
     repo = pname;
-    rev = "refs/tags/v${version}";
-    hash = "sha256-zTz4UK+A4HWf+XGaTh7FOUFEeB9JnZooFnxZ4K3AFGw=";
+    tag = "v${version}";
+    hash = "sha256-rP0qvSb9PxsTMAq0hpB+zdSTHvridyCVdukLUYxdao8=";
   };
 
-  cargoHash = "sha256-YSnGGd2uIxvhxDTJjtQMdv4Qx1DE7RA05Z+q4emJAKg=";
+  useFetchCargoVendor = true;
+  cargoHash = "sha256-Fympp2A04viibo4U79FiBSJIeGDUWS34OOwebCks6S0=";
 
   nativeBuildInputs = [
     rustPlatform.bindgenHook
@@ -33,24 +31,26 @@ rustPlatform.buildRustPackage rec {
     llvmPackages.llvm
     libffi
     libxml2
-  ] ++ lib.optionals stdenv.hostPlatform.isDarwin [
-    CoreFoundation
-    SystemConfiguration
-    Security
   ];
 
   # check references to `compiler_features` in Makefile on update
-  buildFeatures = [
-    "cranelift"
-    "wasmer-artifact-create"
-    "static-artifact-create"
-    "wasmer-artifact-load"
-    "static-artifact-load"
-  ]
-  ++ lib.optional withLLVM "llvm"
-  ++ lib.optional withSinglepass "singlepass";
+  buildFeatures =
+    [
+      "cranelift"
+      "wasmer-artifact-create"
+      "static-artifact-create"
+      "wasmer-artifact-load"
+      "static-artifact-load"
+    ]
+    ++ lib.optional withLLVM "llvm"
+    ++ lib.optional withSinglepass "singlepass";
 
-  cargoBuildFlags = [ "--manifest-path" "lib/cli/Cargo.toml" "--bin" "wasmer" ];
+  cargoBuildFlags = [
+    "--manifest-path"
+    "lib/cli/Cargo.toml"
+    "--bin"
+    "wasmer"
+  ];
 
   env.LLVM_SYS_180_PREFIX = lib.optionalString withLLVM llvmPackages.llvm.dev;
 
@@ -69,6 +69,10 @@ rustPlatform.buildRustPackage rec {
     homepage = "https://wasmer.io/";
     license = lib.licenses.mit;
     platforms = with lib.platforms; linux ++ darwin;
-    maintainers = with lib.maintainers; [ Br1ght0ne shamilton nickcao ];
+    maintainers = with lib.maintainers; [
+      Br1ght0ne
+      shamilton
+      nickcao
+    ];
   };
 }

@@ -5,6 +5,7 @@
   pythonOlder,
   installShellFiles,
   docutils,
+  setuptools,
   ansible,
   cryptography,
   importlib-resources,
@@ -30,12 +31,13 @@
 
 buildPythonPackage rec {
   pname = "ansible-core";
-  version = "2.17.5";
+  version = "2.18.1";
+  pyproject = true;
 
   src = fetchPypi {
     pname = "ansible_core";
     inherit version;
-    hash = "sha256-rn9R/RPcnVfJvNQ+8j+cJVyo8Y9LXAARpPm3JNksWo4=";
+    hash = "sha256-FMrB+Su9rogcsGFu3esXkl6MtQfkhgh5deckUz2d508=";
   };
 
   # ansible_connection is already wrapped, so don't pass it through
@@ -46,6 +48,9 @@ buildPythonPackage rec {
       --replace "[python," "["
 
     patchShebangs --build packaging/cli-doc/build.py
+
+    substituteInPlace pyproject.toml \
+      --replace-fail "setuptools >= 66.1.0, <= 75.6.0" setuptools
   '';
 
   nativeBuildInputs = [
@@ -53,7 +58,9 @@ buildPythonPackage rec {
     docutils
   ];
 
-  propagatedBuildInputs =
+  build-system = [ setuptools ];
+
+  dependencies =
     [
       # depend on ansible instead of the other way around
       ansible

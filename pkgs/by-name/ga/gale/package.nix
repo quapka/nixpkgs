@@ -4,6 +4,8 @@
   rustPlatform,
   fetchFromGitHub,
 
+  jq,
+  moreutils,
   fetchNpmDeps,
   npmHooks,
   nodejs,
@@ -16,48 +18,35 @@
   webkitgtk_4_1,
 }:
 
-let
-  cargo-tauri_2 =
-    let
-      pname = "cargo-tauri";
-      version = "2.0.0-rc.3";
-      src = fetchFromGitHub {
-        owner = "tauri-apps";
-        repo = "tauri";
-        rev = "tauri-v${version}";
-        hash = "sha256-PV8m/MzYgbY4Hv71dZrqVbrxmxrwFfOAraLJIaQk6FQ=";
-      };
-    in
-    cargo-tauri.overrideAttrs {
-      inherit src version;
-      cargoDeps = rustPlatform.fetchCargoTarball {
-        inherit pname version src;
-        sourceRoot = "${src.name}/tooling/cli";
-        hash = "sha256-JPlMaoPw6a7D20KQH7iuhHKfGT5oUKf55tMaMYEM/Z4=";
-      };
-    };
-in
 stdenv.mkDerivation (finalAttrs: {
   pname = "gale";
-  version = "0.8.11";
+  version = "1.2.2";
 
   src = fetchFromGitHub {
     owner = "Kesomannen";
     repo = "gale";
-    rev = "refs/tags/${finalAttrs.version}";
-    hash = "sha256-PXK64WD3vb3uVxBFNU+LiGOipUjIAKW9RLWr1o4RigU=";
+    tag = finalAttrs.version;
+    hash = "sha256-bpeRbsbC1x1AXSyEPs1pUqwMouHQqJ/OtXXlNOVYcEA=";
   };
+
+  postPatch = ''
+    jq '.bundle.createUpdaterArtifacts = false' src-tauri/tauri.conf.json | sponge src-tauri/tauri.conf.json
+  '';
 
   npmDeps = fetchNpmDeps {
     name = "${finalAttrs.pname}-${finalAttrs.version}-npm-deps";
     inherit (finalAttrs) src;
-    hash = "sha256-W0ryt3WH/3SireaOHa9i1vKpuokzIsDlD8R9Fnd0s4k=";
+    hash = "sha256-xKg/ABUdtylFpT3EisXVvyv38++KjucrZ+s3/fFjzmM=";
   };
 
-  cargoDeps = rustPlatform.fetchCargoTarball {
-    inherit (finalAttrs) pname version src;
-    sourceRoot = "${finalAttrs.src.name}/${finalAttrs.cargoRoot}";
-    hash = "sha256-zXZkjSYN6/qNwBh+xUgJPWQvduIUSMVSt/XGbocKTwg=";
+  cargoDeps = rustPlatform.fetchCargoVendor {
+    inherit (finalAttrs)
+      pname
+      version
+      src
+      cargoRoot
+      ;
+    hash = "sha256-OocLkYAdmnAwvojzywNlg6BirkItoopX36aDYfqeeTA=";
   };
 
   cargoRoot = "src-tauri";
@@ -65,10 +54,12 @@ stdenv.mkDerivation (finalAttrs: {
   buildAndTestSubdir = finalAttrs.cargoRoot;
 
   nativeBuildInputs = [
+    jq
+    moreutils
     npmHooks.npmConfigHook
     nodejs
     rustPlatform.cargoSetupHook
-    (cargo-tauri.hook.override { cargo-tauri = cargo-tauri_2; })
+    cargo-tauri.hook
     rustPlatform.cargoCheckHook
     pkg-config
     wrapGAppsHook3

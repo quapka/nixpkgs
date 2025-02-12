@@ -12,18 +12,18 @@ let
 in
 buildDotnetModule (finalAttrs: {
   pname = "yafc-ce";
-  version = "2.1.0";
+  version = "2.7.0";
 
   src = fetchFromGitHub {
     owner = "shpaass";
     repo = "yafc-ce";
     rev = finalAttrs.version;
-    hash = "sha256-dh+lnilwQSrbZNcRGpEXybsNYxkihZUp5t8co06ZXYE=";
+    hash = "sha256-pBnAUrDnOabQq7D1YJ41aJq9MSPIHQ6K8ix5TLwkrZ0=";
   };
 
   projectFile = [ "Yafc/Yafc.csproj" ];
   testProjectFile = [ "Yafc.Model.Tests/Yafc.Model.Tests.csproj" ];
-  nugetDeps = ./deps.nix;
+  nugetDeps = ./deps.json;
 
   dotnet-sdk = dotnet.sdk;
   dotnet-runtime = dotnet.runtime;

@@ -30,7 +30,7 @@ assert sendEmailSupport -> perlSupport;
 assert svnSupport -> perlSupport;
 
 let
-  version = "2.47.0";
+  version = "2.47.2";
   svn = subversionClient.override { perlBindings = perlSupport; };
   gitwebPerlLibs = with perlPackages; [ CGI HTMLParser CGIFast FCGI FCGIProcManager HTMLTagCloud ];
 in
@@ -43,7 +43,7 @@ stdenv.mkDerivation (finalAttrs: {
 
   src = fetchurl {
     url = "https://www.kernel.org/pub/software/scm/git/git-${version}.tar.xz";
-    hash = "sha256-HOEU2ohwQnG0PgJ8UeBNk5n4yI6e91Qtrnrrrn2HvE4=";
+    hash = "sha256-sZJovmtvFVa0ep3YNCcuFn06dXQM3NKDzzgS7f/jkw8=";
   };
 
   outputs = [ "out" ] ++ lib.optional withManual "doc";
@@ -245,10 +245,11 @@ stdenv.mkDerivation (finalAttrs: {
 
    + (if svnSupport then ''
         # wrap git-svn
-        wrapProgram $out/libexec/git-core/git-svn                                                                                \
-                     --set GITPERLLIB "$out/${perlPackages.perl.libPrefix}:${perlPackages.makePerlPath (perlLibs ++ [svn.out])}" \
-                     --prefix PATH : "${svn.out}/bin" ''
-       else '' # replace git-svn by notification script
+        wrapProgram $out/libexec/git-core/git-svn \
+          --set GITPERLLIB "$out/${perlPackages.perl.libPrefix}:${perlPackages.makePerlPath (perlLibs ++ [svn.out])}" \
+          --prefix PATH : "${svn.out}/bin"
+      '' else ''
+        # replace git-svn by notification script
         notSupported $out/libexec/git-core/git-svn
      '')
 
@@ -261,9 +262,11 @@ stdenv.mkDerivation (finalAttrs: {
         notSupported $out/libexec/git-core/git-send-email
       '')
 
-   + lib.optionalString withManual ''# Install man pages
+   + lib.optionalString withManual ''
+       # Install man pages
        make -j $NIX_BUILD_CORES PERL_PATH="${buildPackages.perl}/bin/perl" cmd-list.made install install-html \
-         -C Documentation ''
+         -C Documentation
+     ''
 
    + (if guiSupport then ''
        # Wrap Tcl/Tk programs
