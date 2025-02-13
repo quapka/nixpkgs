@@ -5,6 +5,7 @@
   pytestCheckHook,
   pythonOlder,
   requests,
+  lxml,
   beautifulsoup4
 }:
 
@@ -25,6 +26,7 @@ buildPythonPackage rec {
 
   dependencies = [
     requests
+    lxml
     beautifulsoup4
   ];
 
