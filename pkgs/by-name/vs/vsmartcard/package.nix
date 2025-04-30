@@ -1,7 +1,6 @@
 {
   stdenv,
   fetchFromGitHub,
-
   automake,
   autoconf,
   libtool,
@@ -22,28 +21,28 @@ stdenv.mkDerivation rec {
     hash = "sha256-+BrX2aqByUvIUbN4K+sdq9bH29FD2rtTt4q+URPgx7A=";
   };
 
-    srcDirectory = "./virtualsmartcard/";
+  srcDirectory = "./virtualsmartcard/";
 
-    configurePhase = ''
-      pushd ${srcDirectory}
-      autoreconf -vis
-      ./configure --prefix $out
-      popd
-    '';
+  configurePhase = ''
+    pushd ${srcDirectory}
+    autoreconf -vis
+    ./configure --prefix $out
+    popd
+  '';
 
-    installPhase = ''
-      pushd ${srcDirectory}
-      make install
-      popd
-    '';
+  installPhase = ''
+    pushd ${srcDirectory}
+    make install
+    popd
+  '';
 
-    nativeBuildInputs = [
-        automake
-        autoconf
-        libtool
-        help2man
-        pkg-config
-        pcsclite
-        python3
-    ];
+  nativeBuildInputs = [
+    automake
+    autoconf
+    libtool
+    help2man
+    pkg-config
+    pcsclite
+    python3
+  ];
 }
