@@ -36,6 +36,11 @@ stdenv.mkDerivation rec {
     popd
   '';
 
+  # local Python package needs to be available
+  fixupPhase = ''
+    cp --recursive ${srcDirectory}/src/vpicc/virtualsmartcard $out/bin
+  '';
+
   nativeBuildInputs = [
     automake
     autoconf
